@@ -126,4 +126,13 @@ And many, many more...
 
 If in doubt, you can react out in the `#contributing` channel in the [OpenFaaS Slack](https://slack.openfaas.io)
 
+# Forking the repository
+
+To get started contributing you need to create your own copy of the repository you want to contribute to. 
+
+So, login to Github, and find the repository you are looking to contribute to then click the "fork" button.
+
+![Fork a github repository](/images/github-fork.png)
+
 # Opening your PR
+
