@@ -134,6 +134,13 @@ So, login to Github, and find the repository you are looking to contribute to th
 
 ![Fork a github repository](/images/github-fork.png)
 
+# Creating a branch and committing your code
+
+Once you have [cloned your fork](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) to your 
+computer you need to create a branch for you to work on.
+
+You can do this by typing `git checkout -b <branch name>`. This creates your local branch to work on.
+
 # Opening your PR
 
-
+Once you h
