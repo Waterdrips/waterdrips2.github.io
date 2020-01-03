@@ -1,11 +1,10 @@
 ---
 layout: post
 title: How To Get Started Contributing to OpenFaaS
-excerpt: Sometimes it can be hard to get yourself setup to contribute to OpenSource. Especially if it requires running Kubernetes, Installing new programming languages and learning what maintainers expect.
 date: 01-01-2020
 ---
 
-![OpenFaaS Cloud Dashboard](/images/ofc-dashboard.png)
+![OpenFaaS Laptop](/images/of-contributing.jpg)
 
 # New Year New You?
 Don't bother with the Gym. We all know you won't keep it up. 
@@ -22,6 +21,8 @@ patient with my early contributions.
 
 This post focuses mainly on code contributions. There are other types of contributions that are just as important and 
 would be welcomed. Things like documentation, user guides, blog posts and helping members of the community on slack.
+
+There's a good section in the [OpenFaaS docs](https://github.com/openfaas/faas/blob/master/CONTRIBUTING.md) on contributing too.
 
 #### A word of warning
 
@@ -47,9 +48,10 @@ I like using the Goland IDE by JetBrains, but you can use VSCode or any other ID
 
 ### To install Golang
 
-This should inslall Golang 1.12 on a Macosx or Linux distribution. There's a [good section here](https://github.com/alexellis/faas-containerd#install-go-112-x86_64)
+This should install Golang 1.12 on a Macosx or Linux distribution. There's a [good section here](https://github.com/alexellis/faas-containerd#install-go-112-x86_64)
 on installing Golang on other CPU Architectures. 
 
+> Note: You can use a package manager to install golang too. This section installs v1.12 specifically
 
 ```sh
 curl -SLsf https://dl.google.com/go/go1.12.14.linux-amd64.tar.gz > go.tgz
@@ -79,7 +81,7 @@ If `go version` outputs correctly then you should have setup Golang correctly.
 You will probably will need access to Docker and Kubernetes while writing contributions to OpenFaaS. You can install 
 Docker by following one of the many online guides. 
 
-If you are using Kubernetes you will need to isntall `kubectl`. Best check online for the most up to date installation 
+If you are using Kubernetes you will need to install `kubectl`. Best check online for the most up to date installation 
 method for your Operating System.
 
 I usually use a tool called [k3d](https://github.com/rancher/k3d) for creating Kubernetes environments, it creates a 
@@ -93,7 +95,7 @@ k3d create
 
 # Connect to it
 export KUBECONFIG="$(k3d get-kubeconfig --name='k3s-default')"
-kunectl get nodes 
+kubectl get nodes 
 
 
 # Remove your cluster 
@@ -141,6 +143,40 @@ computer you need to create a branch for you to work on.
 
 You can do this by typing `git checkout -b <branch name>`. This creates your local branch to work on.
 
+
+Once you have written your contribution and written tests (if a code change) and tested the change manually you should 
+commit your code, 
+```sh 
+git add <file names for you have changed/added>
+# then 
+git commit -s 
+```
+
+This should open a commit window in your chosen editor (Vim by default)
+In this file you should write the title, leave 2 lines and then a description.
+[This is a good blog about commit messages](https://chris.beams.io/posts/git-commit/)
+
+
 # Opening your PR
 
-Once you h
+Once you have finished, you need to open a Pull Request (PR) on github.
+
+Find your fork (copy of the repository) and then go to branches page. From here there's a "New pull request" button.
+
+You will probably find a "pull request template", a list of questions you need to answer, like why you have make this 
+change, how its been tested and the impact of the change on existing users.
+
+If you are creating a PR that "Closes" and issue then you can add `Closes #<Issue Number>` in the box and github will 
+close that issue when the PR is merged!
+
+Fill in the questions inside the pull request box and submit!
+![PR Template image](/images/pr-template.png)
+
+# That's it
+
+After you have raised your PR someone should take a look at it, provide feedback or suggestions and let you know the 
+next steps. You may need to make a change, update some docs or re-word commit messages.
+
+You might want to post in the `#contributing` channel on the [OpenFaaS Slack](https://slack.openfaas.io)
+
+
