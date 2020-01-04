@@ -1,7 +1,7 @@
 ---
 layout: post
 title: How To Get Started Contributing to OpenFaaS
-date: 01-01-2020
+date: 04-01-2020
 ---
 
 ![OpenFaaS Laptop](/images/of-contributing.jpg)
@@ -26,16 +26,17 @@ There's a good section in the [OpenFaaS docs](https://github.com/openfaas/faas/b
 
 #### A word of warning
 
-One thing to remember when contributing to an Open Source project is that the maintainers of the project have to
-maintain your code long after your initial contribution, so its always worth checking that 
-your proposed contribution is something that will benefit the project, rather than something only you will use.
+Maintaining an open source project is hard, time consuming and often done for free. There are a load of great resources
+on the internet about the things maintainers face.
 
-The burden of maintaining these hundreds (or thousands) of contributions lies with the team (or person) because
-initially there is no expectation that you will hang around after your PR is merged.
+It might be worth you doing a small amount of reading into this, so you know what to expect from a maintainer, and what
+they expect from your contribution(s).
 
-So, it's always worth picking an issue that already exists in the repository, or raising an issue for discussion, before
-you get stuck into your work. If you do this, and talk to the maintainers then I'm sure they will guide you in the right
-direction for a contribution with a positive impact.
+Here are some examples:
+
+* [Daniel Bachhuber](https://danielbachhuber.com/2016/06/26/my-condolences-youre-now-the-maintainer-of-a-popular-open-source-project/)
+* [Alex Ellis](https://blog.alexellis.io/the-5-pressures-of-leadership/)
+* This twitter thread from [Benjamin Lupton](https://twitter.com/balupton/status/438928812185620480)
 
 
 # Setting up Golang
@@ -118,7 +119,7 @@ various open issues, some good places to look are:
 
 * [faas-cli](https://github.com/openfaas/faas-cli/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) The OpenFaaS CLI
 * [OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) (OFC) 
-* [ofc-bootstrap]() a tool for provisioning OFC Clusters
+* [ofc-bootstrap](https://github.com/openfaas-incubator/ofc-bootstrap/issues) a tool for provisioning OFC Clusters
 * [opwnfaas.github.io](https://github.com/openfaas/openfaas.github.io/issues) The OpenFaaS Website
 * [k3sup](https://github.com/alexellis/k3sup/issues) A tool by Alex that helps manage kubernetes applications
 * [inlets](https://github.com/inlets/inlets) A reverse proxy tool
@@ -156,6 +157,8 @@ This should open a commit window in your chosen editor (Vim by default)
 In this file you should write the title, leave 2 lines and then a description.
 [This is a good blog about commit messages](https://chris.beams.io/posts/git-commit/)
 
+Your IDE may also provide a mechanism to commit not using the command line, so feel free to use whatever you're most 
+comfortable with
 
 # Opening your PR
 
