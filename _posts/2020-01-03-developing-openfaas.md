@@ -24,7 +24,7 @@ would be welcomed. Things like documentation, user guides, blog posts and helpin
 
 There's a good section in the [OpenFaaS docs](https://github.com/openfaas/faas/blob/master/CONTRIBUTING.md) on contributing too.
 
-#### A word of warning
+#### Maintainers are amazing!
 
 Maintaining an open source project is hard, time consuming and often done for free. There are a load of great resources
 on the internet about the things maintainers face.
@@ -34,9 +34,9 @@ they expect from your contribution(s).
 
 Here are some examples:
 
-* [Daniel Bachhuber](https://danielbachhuber.com/2016/06/26/my-condolences-youre-now-the-maintainer-of-a-popular-open-source-project/)
-* [Alex Ellis](https://blog.alexellis.io/the-5-pressures-of-leadership/)
-* This twitter thread from [Benjamin Lupton](https://twitter.com/balupton/status/438928812185620480)
+* [My condolences, you’re now the maintainer of a popular open source project](https://danielbachhuber.com/2015/06/26/my-condolences-youre-now-the-maintainer-of-a-popular-open-source-project/) - Daniel Bachhuber
+* [The Five Pressures of Leadership](https://blog.alexellis.io/the-5-pressures-of-leadership/) - Alex Ellis
+* [This twitter thread](https://twitter.com/balupton/status/438928812185620480) - Benjamin Lupton
 
 
 # Setting up Golang
@@ -52,20 +52,7 @@ I like using the Goland IDE by JetBrains, but you can use VSCode or any other ID
 This should install Golang 1.12 on a Macosx or Linux distribution. There's a [good section here](https://github.com/alexellis/faas-containerd#install-go-112-x86_64)
 on installing Golang on other CPU Architectures. 
 
-> Note: You can use a package manager to install golang too. This section installs v1.12 specifically
-
-```sh
-curl -SLsf https://dl.google.com/go/go1.12.14.linux-amd64.tar.gz > go.tgz
-sudo rm -rf /usr/local/go/
-sudo mkdir -p /usr/local/go/
-sudo tar -xvf go.tgz -C /usr/local/go/ --strip-components=1
-
-export GOPATH=$HOME/go/
-export PATH=$PATH:/usr/local/go/bin/
-
-# You can now test the installation with this command:
-go version
-```
+You should probably use a package manager to install golang. It should sort everything for you.
 
 You probably want to add these lines to your .bashrc or .zshrc so that `go` is available in new terminals and after you 
 reboot.
@@ -103,8 +90,6 @@ kubectl get nodes
 k3d delete
 ```
 
-> Note: When using a macos I found that I needed to specify a non-default (6443) port with --api-port 6444 
-
 You should now have the tools to deploy an OpenFaaS installation quickly, and reset things when you need a fresh start.
 
 # Finding an issue to work on
@@ -126,6 +111,9 @@ various open issues, some good places to look are:
 * [faas-netes](https://github.com/openfaas/faas-netes/issues) The Kubernetes specific components to OpenFaaS
 
 And many, many more...
+
+You can look in the [contributing guide](https://github.com/openfaas/faas/blob/master/CONTRIBUTING.md#how-can-i-get-involved)
+at what types of things you can get involved with
 
 If in doubt, you can react out in the `#contributing` channel in the [OpenFaaS Slack](https://slack.openfaas.io)
 
@@ -162,6 +150,9 @@ comfortable with
 
 # Opening your PR
 
+Before you open a PR on github you should read the [OpenFaaS Contributing guidelines](https://github.com/openfaas/faas/blob/master/CONTRIBUTING.md).
+This is a requirement for opening a PR against OpenFaaS, and you have to check a box to confirm you have read it.
+
 Once you have finished, you need to open a Pull Request (PR) on github.
 
 Find your fork (copy of the repository) and then go to branches page. From here there's a "New pull request" button.
@@ -183,3 +174,8 @@ next steps. You may need to make a change, update some docs or re-word commit me
 You might want to post in the `#contributing` channel on the [OpenFaaS Slack](https://slack.openfaas.io)
 
 
+### Check this out
+
+Alex Ellis, the maintainer of OpenFaaS did a call in early 2019 about contributing, you can find the recording here 
+
+[![Contributing image](/images/how-to-contribute.png)](https://www.youtube.com/watch?v=kOgHjU38Efg&feature=youtu.be)
