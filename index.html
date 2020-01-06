@@ -10,7 +10,7 @@ layout: default
 
       <div class="entry">
         {% if post.image %}
-          <a href="{{ site.baseurl }}{{ post.url }}" ><img src="/images/{{ post.image }}"/></a>
+          <a href="{{ site.baseurl }}{{ post.url }}" ><img alt="{{ post.image_alt }}" src="/images/{{ post.image }}"/></a>
         {% else %}
 
         {% endif %}
