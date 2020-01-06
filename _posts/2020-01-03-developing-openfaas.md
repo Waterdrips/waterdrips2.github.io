@@ -1,7 +1,9 @@
 ---
 layout: post
 title: How To Get Started Contributing to OpenFaaS
+description: Get started contributing to OpenFaaS
 date: 04-01-2020
+image: /images/of-contributing.jpg
 ---
 
 ![OpenFaaS Laptop](/images/of-contributing.jpg)
