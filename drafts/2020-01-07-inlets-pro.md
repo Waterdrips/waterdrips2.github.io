@@ -84,7 +84,7 @@ The managed k3s service provided by Civo is great, here are my highlights:
 
 * Marketplace apps
 * DNS entry for master node, for when your nodes are recycled
-* Civo CLI
+* Cvco CLI
 * Speed of cluster creation
 * Clean and friendly Web UI
 * Their constant stream of [blog posts](https://www.civo.com/blog)
