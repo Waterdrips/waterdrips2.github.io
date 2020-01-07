@@ -28,7 +28,7 @@ Everyone is having a blast, or at least it appears that way, so well done & than
 #### Civo cli
 
 Civo provide a cli to manage clusters (as well as their other services). It's great, works well and is even packaged in a
-docker container for those of us who dont have Ruby installed. With this it is easy to get the status of clusters, create 
+docker container for those of us who don't have Ruby installed. With this it is easy to get the status of clusters, create 
 new ones and even install marketplace apps.
 
 ![Civo CLI image](/images/civo-cli.png)
@@ -153,7 +153,7 @@ They got those cards printed for me and mailed them to me after the Kubecon fix.
 with as many of those toxic recruiter buzzword terms in them. They seem to have jammed a lot onto that small business 
 card. Well done...
 
-![civo-sticers](/images/civo-card.png)
+![civo-stickers](/images/civo-card.png)
 
 If a team are working together in this way then they can do great things! Good luck guys.
 
@@ -170,7 +170,7 @@ It wouldn't be right not to mention some of the other tools I'm finding really u
 
 #### k3sup
 If you want to quickly spin up k3s clusters on your own hardware you can use [k3sup](https://k3sup.dev) to quickly 
-install k3s, as well as install applications onto any kubernetes cluster with sensible defaults. Ths written and 
+install k3s, as well as install applications onto any kubernetes cluster with sensible defaults. This is written and 
 maintained by [Alex Ellis](https://twitter.com/alexellisuk) and has contributions from loads of other people (including 
 myself).
 
@@ -227,7 +227,7 @@ like OpenFaaS, K3sup and Inlets.
 I left my full time job at the end of 2019 to start my own business advising companies on Digital Transformation, 
 DevOps and Cloud Native architecture.
 
-If your team has “a fear of deploying on a friday” or is struggling with utilising the power of public cloud then I 
+If your team has “a fear of deploying on a Friday” or is struggling with utilising the power of public cloud then I 
 would love to have a chat. 
 
 Don't be a stranger!
