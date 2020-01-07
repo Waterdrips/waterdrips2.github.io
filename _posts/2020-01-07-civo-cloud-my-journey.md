@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Civo Cloud Kubernetes #KUBE100
+title: Civo Cloud Kubernetes KUBE100
 description: What I have been up to on Civo Cloud's managed k3s service
 date: 07-01-2020
 image: civo-card.png
