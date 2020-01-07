@@ -1,24 +1,24 @@
 ---
 layout: post
-title: Civo Cloud Kubernetes KUBE100
-description: What I have been up to on Civo Cloud's managed k3s service
+title: Civo Kubernetes KUBE100
+description: What I have been up to on Civo's managed k3s service
 date: 07-01-2020
 image: civo-card.png
-image_alt: civo cloud kube100 stickers
+image_alt: civo kube100 stickers
 ---
 
 ![civo-sticers](/images/civo-card.png)
 
 # The World's First Managed K3s
 
-When Civo Cloud announced they were looking for Beta testers for their new managed Kubernetes offering I obviously jumped
+When Civo announced they were looking for Beta testers for their new managed Kubernetes offering I obviously jumped
 at the chance. Free compute - never turn that down! (Thanks Civo)
 
 #### KUBE100
 
 Civo have been running a beta for their offering, it's called KUBE100, you can request to join [here](https://www.civo.com/kube100)
 
-Its been great so far, there have been a few teething problems. They have all been resolved well, that's the point of a 
+It's been great so far, there have been a few teething problems. They have all been resolved well, that's the point of a 
 Beta, and Civo have been managing the process really well through a community slack group that you get access to when 
 you are accepted for the beta.
 
@@ -43,10 +43,10 @@ worker nodes about 50mb. It's packaged for ARM64 and ARMv7 (think Raspberry Pi) 
 scripts (or tools) that can detect the CPU architecture. This allows you to spin up clusters on anything from your home
 raspberry pis to large bare-metal servers.
 
-Its fast. Civo cloud can spin up a k3s cluster for you in under 2 minutes. We will explore more on this later.
+It's fast. Civo can spin up a k3s cluster for you in under 2 minutes. We will explore more on this later.
 
 Rancher do a better job at explaining all of the features and benefits in the [docs](https://rancher.com/docs/k3s/latest/en/). 
-We wont dwell on this much more here, there's a lots of great resources on this already.
+We won't dwell on this much more here, there's a lots of great resources on this already.
 
 
 ### How is k3s different from k8s?
@@ -74,7 +74,7 @@ Civo have done a great job of engaging the developers that have offered to beta 
 This makes sense, there's a large section on their website about how they are community focused. This doesn't always 
 mean that companies with this attitude actually follow through on this and deliver their vision. 
 
-Civo have defiantly focused on this, and you can tell.
+Civo have definitely focused on this, and you can tell.
 
 ![civo website community section](/images/civo-community.png)
 
@@ -84,7 +84,7 @@ The managed k3s service provided by Civo is great, here are my highlights:
 
 * Marketplace apps
 * DNS entry for master node, for when your nodes are recycled
-* Cico CLI
+* Cvco CLI
 * Speed of cluster creation
 * Clean and friendly Web UI
 * Their constant stream of [blog posts](https://www.civo.com/blog)
@@ -92,7 +92,7 @@ The managed k3s service provided by Civo is great, here are my highlights:
 
 # OpenFaaS Cloud
 
-My main use for Civo Cloud's k3s is a platform to deploy and develop [OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud)
+My main use for Civo's managed k3s is a platform to deploy and develop [OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud)
 
 OpenFaaS cloud is a self-hosted PaaS for serverless, with built in CI&CD, dashboards and Git Flow. 
 Here are the main Features:
@@ -106,8 +106,8 @@ Here are the main Features:
 * Runtime-logs for your functions
 * Fast, non-root image builds using buildkit from Docker
 
-I have been contributing to OpenFaaS Cloud and needed a place to run, test and develop my new features. I used Civo 
-Cloud's service to deploy my changes when I implemented runtime logs in OpenFaaS Cloud, you can see them here
+I have been contributing to OpenFaaS Cloud and needed a place to run, test and develop my new features. I used Civo's 
+service to deploy my changes when I implemented runtime logs in OpenFaaS Cloud, you can see them here
 
 ![Runtime logs](/images/runtime-logs.jpg)
 
@@ -131,7 +131,7 @@ team for getting it merged and released so quickly!
 
 # That issue Andy fixed while at Kubecon
 
-There was an issue that seemed to be effecting my account's ability to spin up new clusters. I mentioned that I was having
+There was an issue that seemed to be affecting my account's ability to spin up new clusters. I mentioned that I was having
 problems on the Civo slack. I needed a cluster to deploy a new OpenFaaS Cloud installation that I was testing. I was deep 
 in flow and wanted a cluster quickly, I turned to one of the other providers of managed kubernetes (who shall remain nameless).
 
@@ -147,7 +147,7 @@ for that.
 
 #### People
 From where I sit, as a user, Civo have an amazing team. Everyone is helpful, knowledgeable and committed. They also have 
-a great sense of humor, take the title image for this blog for example. 
+a great sense of humour, take the title image for this blog for example. 
 
 They got those cards printed for me and mailed them to me after the Kubecon fix. We were having a joke about a job title
 with as many of those toxic recruiter buzzword terms in them. They seem to have jammed a lot onto that small business 
@@ -161,7 +161,7 @@ If a team are working together in this way then they can do great things! Good l
 
 Civo, as I have mentioned, are smashing this community thing. Keep is up guys!
 
-Its great to see their engagement with the community. This is a great way for them to improve the state of Cloud Native,
+It's great to see their engagement with the community. This is a great way for them to improve the state of Cloud Native,
  a space that is rapidly expanding and where they are providing some great content, resources and products. 
 
 # Other cool k3s projects and tooling
@@ -170,7 +170,6 @@ It wouldn't be right not to mention some of the other tools I'm finding really u
 
 #### k3sup
 If you want to quickly spin up k3s clusters on your own hardware you can use [k3sup](https://k3sup.dev) to quickly 
-install k3s, as well as install applications onto any kubernetes cluster with sensible defaults. This is written and 
 maintained by [Alex Ellis](https://twitter.com/alexellisuk) and has contributions from loads of other people (including 
 myself).
 
@@ -201,7 +200,7 @@ It's that easy!
 #### k3d
 
 Rancher love containers, and k3s is no exception. There is a tool called [k3d](https://github.com/rancher/k3d) that 
-builds k3s clusters in docker containers. Its great for testing out stuff, then deleting the clusters once you're done. 
+builds k3s clusters in docker containers. It's great for testing out stuff, then deleting the clusters once you're done. 
 Quick, easy, no fuss.
 
 ```sh
