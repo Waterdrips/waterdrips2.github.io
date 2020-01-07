@@ -220,13 +220,6 @@ I used k3d a lot. If you have not used it then give it a try!
 
 # Thanks for reading!
 
-I am a consultant Cloud Native Engineer and programmer. I spend most of my spare time contributing to projects 
-like OpenFaaS, K3sup and Inlets.
-
-I left my full time job at the end of 2019 to start my own business advising companies on Digital Transformation, 
-DevOps and Cloud Native architecture.
-
-If your team has “a fear of deploying on a Friday” or is struggling with utilising the power of public cloud then I 
-would love to have a chat. 
+I’m a Cloud Native consultant, get in touch to see if I can help you with migrating your project.
 
 Don't be a stranger!
