@@ -1,232 +1,155 @@
 ---
 layout: post
-title: Civo Kubernetes KUBE100
-description: What I have been up to on Civo's managed k3s service
+title: Inlets and Inlets Pro
+description: Give anything a public IP with inlets and inlets pro
 date: 07-01-2020
-image: civo-card.png
-image_alt: civo kube100 stickers
+image: inlets-home.jpg
+image_alt: inlets pro headline image
 ---
 
-![civo-sticers](/images/civo-card.png)
 
-# The World's First Managed K3s
-
-When Civo announced they were looking for Beta testers for their new managed Kubernetes offering I obviously jumped
-at the chance. Free compute - never turn that down! (Thanks Civo)
-
-#### KUBE100
-
-Civo have been running a beta for their offering, it's called KUBE100, you can request to join [here](https://www.civo.com/kube100)
-
-It's been great so far, there have been a few teething problems. They have all been resolved well, that's the point of a 
-Beta, and Civo have been managing the process really well through a community slack group that you get access to when 
-you are accepted for the beta.
-
-Everyone is having a blast, or at least it appears that way, so well done & thanks Civo!
+![Street Sign with 127.0.0.1](/images/inlets-home.jpg)
 
 
-#### Civo cli
+# What is inlets?
+Inlets is a reverse proxy written and maintained by [Alex Ellis](https://twitter.com/alexellisuk) and the github community.
 
-Civo provide a cli to manage clusters (as well as their other services). It's great, works well and is even packaged in a
-docker container for those of us who don't have Ruby installed. With this it is easy to get the status of clusters, create 
-new ones and even install marketplace apps.
+This means you can use it to create inbound network tunnels to computers that dont have a public ip, are behind firewalls
+or get assigned new IPs frequently. Things like your laptop when you move from the office to a coffee shop. While writing 
+this post I have probably been on 5 different networks, but still been able to connect to my laptop's [k3d](https://github.com/rancher/k3d) 
+cluster using the same public IP address.
 
-![Civo CLI image](/images/civo-cli.png)
+## Why inlets
+It's on the [CNCF](https://cncf.io) landscape in the [Service Proxy](https://landscape.cncf.io/category=service-proxy&format=card-mode&grouping=category)
+section. It's cloud native!
 
-### What is K3s?
+![Inlets Cloud NAtive card](/images/cncf-inlets.png)
 
-According to Rancher, who took Kubernetes and made it smaller, it's a "Certified Kubernetes distribution built for IoT &
- Edge computing". You can check out the [k3s web page here](https://k3s.io) for more information.
+There are plenty of freemium services out there that will give you inbound network access to processes that dont have 
+inbound connectivity, but most of these services are in control of your data, rate limit and are closed source. Inlets 
+gives you back control of your data, privacy and lets you run the service in the way you want. 
+
+With cloud VMs starting at $5 with heaps of inbound data transfer there's no need to pay 10s of dollars a month for someone else 
+to run a limited service for you. 
+
+## How it works
+
+Inlets creates a tunnel from your local process to a public cloud instance (or anything that can accept inbound traffic).
+I have been using digital ocean's smallest VMs as my exit nodes. However, you can setup inlets using anything that can be 
+accessed from both the internet, and the application or process you want to expose. 
+
+## inletsctl
+
+There is a handy CLI for managing your inlets services called [inletsctl](https://github.com/inlets/inletsctl).
+I will be using this cli throughout the post as it simplifies the process of getting things setup and configured. 
+
+
+![inletsctl basic command](/images/inletsctl.png)
+
+The creat command automates the provisioning, setup and configuration of the publicly accessible exit-node using cloud 
+instances.
+
+Currently supported providers:
+* Digital Ocean
+* Scaleway
+* Civo
+* Google Cloud
+* Packet
+
+You will need your own account, and will incur costs, with whichever provider you use if you are following along.
+
+
+There are some great blog posts already about setting up inlets without the CLI
+
+ - [HTTPS for your local endpoints with inlets and Caddy](https://blog.alexellis.io/https-inlets-local-endpoints/) - Alex Ellis
+ - [Setting up an EC2 Instance as an Inlets Exit Node](https://mbacchi.github.io/2019/08/21/inlets-aws-ec2.html) - Matt Bacchi
  
-What does this actually mean though? Well, it is small, really small. The master node process runs in under 500mb ram, and
-worker nodes about 50mb. It's packaged for ARM64 and ARMv7 (think Raspberry Pi) and you can easily build installation 
-scripts (or tools) that can detect the CPU architecture. This allows you to spin up clusters on anything from your home
-raspberry pis to large bare-metal servers.
+Therefore I wont be focusing on this, instead we will focus on the why and the what of inlets.
+## Before you get started
 
-It's fast. Civo can spin up a k3s cluster for you in under 2 minutes. We will explore more on this later.
+Its probably best to say that if you are using a corporate network, or any network you aren't responsible for, you should
+ensure you have permission to start routing inbound internet traffic. It goes without saying that this exposes the network 
+to extra risk and could drastically increase the network attack surface.
 
-Rancher do a better job at explaining all of the features and benefits in the [docs](https://rancher.com/docs/k3s/latest/en/). 
-We won't dwell on this much more here, there's a lots of great resources on this already.
+## inlets-operator 
 
+I'm using Kubernetes and can't forward every process from every node... 
 
-### How is k3s different from k8s?
+Not to worry, the [inlets-operator](https://github.com/inlets/inlets-operator) has your back. Using this 
 
-That's a good question. Don't immediately expect that you can deploy your application onto k3s without having to do some 
-extra work. If you're coming from a managed kubernetes service provided by one of the large cloud providers you get a 
-lot of integrations out of the box.
+The operator automates the creation of an inlets exit-node on public cloud, and runs the client as a Pod inside your 
+cluster. Your Kubernetes Service will be updated with the public IP of the exit-node and you can start receiving 
+incoming traffic immediately. 
 
-For example, the first thing I did was to install the [gitlab helm chart](https://docs.gitlab.com/charts/), which sat in 
-pending forever. This is because there was no default storage provider for the persistent volumes required by many apps.
-Not to worry though, Civo provide a 1 click [Longhorn installation](https://www.civo.com/learn/cloud-native-stateful-storage-for-kubernetes-with-rancher-labs-longhorn) 
-which can provide the persistent volumes required. 
+I have written a separate post on the inlets operator that you should read if you are using Kubernetes somewhere where 
+you dont have inbound network traffic. Like k3s/k3d/minikube/microk8s/Docker Desktop/KinD.
 
-![civo marketplace screenshot](/images/civo-longhorn.png)
+[You can read it here](/inlets-operator/)
 
-Andy Jeffries, the Civo CTO wrote a good blog post on [K8s vs k3s](https://www.civo.com/blog/k8s-vs-k3s) which is well 
-worth a read if you have the time.
+# People LOVE reverse proxies
 
-# The Civo Community
+My most viewed tweet so far is this
 
-I mentioned the Civo slack earlier, which is great for asking questions about their k3s offering, but it has delivered much 
-more than just a beta support channel to Civo. I have seen the group help each other out more times than I could count. 
-Civo have done a great job of engaging the developers that have offered to beta test the service. 
+![inlets tweet](/images/inlets-tweet.png)
 
-This makes sense, there's a large section on their website about how they are community focused. This doesn't always 
-mean that companies with this attitude actually follow through on this and deliver their vision. 
+# Why Inlets Pro?
 
-Civo have definitely focused on this, and you can tell.
+Inlets Pro is a commercial extension to inlets, you can [try it out and contact OpenFaaS for more information](https://github.com/inlets/inlets-pro-pkg#getting-a-license-key--more-info)
 
-![civo website community section](/images/civo-community.png)
+According to the github REAMDE [inlets-pro is an L4 TCP load-balancer](https://github.com/inlets/inlets-pro-pkg/). 
 
-# Features provided by Civo
+OK, thanks. 
 
-The managed k3s service provided by Civo is great, here are my highlights:
+For those of us that can't remember the entire network stack and what each layer does or is (humans?), 
+this roughly translates as `deliveres the correct data to the correct application process over the network`.
 
-* Marketplace apps
-* DNS entry for master node, for when your nodes are recycled
-* Cvco CLI
-* Speed of cluster creation
-* Clean and friendly Web UI
-* Their constant stream of [blog posts](https://www.civo.com/blog)
-* Their promotion of [community content](https://www.civo.com/blog/kube100-so-far#learn-guides-and-content)
+So putting that in the context of inlets-pro, it forwards TCP traffic over an encrypted websocket secured with TLS to 
+your application process. Cool!
 
-# OpenFaaS Cloud
+These are some of the [features](https://github.com/inlets/inlets-pro-pkg/#features)
 
-My main use for Civo's managed k3s is a platform to deploy and develop [OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud)
+* Support for any TCP protocol
+* Automatic TLS encryption for tunnel and control-port
+* Pass-through L4 proxy
+* Automatic port detection, as announced by client
+* systemd support and automatic retries
+* Kubernetes compatible
 
-OpenFaaS cloud is a self-hosted PaaS for serverless, with built in CI&CD, dashboards and Git Flow. 
-Here are the main Features:
+What am I using that normal inlets can't do? 
+* Non HTTP traffic (SSH and Postgres)
+* TLS pass-through (Terminating TLS at the process rather than the exit node)
+* systemd support
 
-* Portable - self-host or use the hosted Community Cluster (SaaS)
-* Multi-user - use your GitHub/GitLab identity to log into your personal dashboard
-* Automates CI/CD triggered by git push (also known as GitOps)
-* Onboard new git repos with a single click by adding the GitHub App or a repository tag in GitLab
-* Immediate feedback on your personal dashboard and through GitHub Checks or GitLab Statuses
-* Sub-domain per user or organization with HTTPS
-* Runtime-logs for your functions
-* Fast, non-root image builds using buildkit from Docker
+If you just want to expose a service for http traffic you can use inlets. I use standard inlets when proxying my draft 
+blog posts, which are served from my laptop, out to the internet so my friends and family can proofread them. (I'm REALLY
+bad at spelling)
 
-I have been contributing to OpenFaaS Cloud and needed a place to run, test and develop my new features. I used Civo's 
-service to deploy my changes when I implemented runtime logs in OpenFaaS Cloud, you can see them here
-
-![Runtime logs](/images/runtime-logs.jpg)
-
-#### Get involved!
-The dashboard is written in React, if anyone is interested in contributing you can join the [OpenFaaS Slack here](https://slack.openfaas-io)
-where you should be able to reach out in the `#contributing` channel. There's also lots of Golang code involved, if you
-are more comfortable with that.
+But for this post we will use both standard and pro features to show off as many use cases as possible.
 
 
-# I contributed to their App installers
+# What can I use this for?
+(anywhere you need a public IP)
+(find that tweet from alex)
+(Production services, management of APIs in private VPCs, bastion hosts.   Prototyping, Demos, Home Lab, IoT)
+# Enough talk - time for action
 
-Their kubernetes app installers are open source. When someone on slack noticed that the postgres app wasn't working 
-I pulled down the [github repository](https://github.com/civo/kubernetes-marketplace) that contains the apps and 
-committed a fix. This was swiftly merged and released to production, where several other people created clusters and 
-verified that the app worked.
+### Setup
 
-![Civo PR](/images/civo-pr.png)
+We have already briefly looked at `inletsctl`, but we didnt discuss installation or setup. 
 
-I didn't write the initial implementation but it was easy enough to get involved and fix the issue. Thanks to the Civo 
-team for getting it merged and released so quickly!
+> All of the commands shown are for linux and will probably work on Mac too. If you are using Windows then you are on your own
 
-# That issue Andy fixed while at Kubecon
+This is how we get started:
 
-There was an issue that seemed to be affecting my account's ability to spin up new clusters. I mentioned that I was having
-problems on the Civo slack. I needed a cluster to deploy a new OpenFaaS Cloud installation that I was testing. I was deep 
-in flow and wanted a cluster quickly, I turned to one of the other providers of managed kubernetes (who shall remain nameless).
+(commands and screenshots for demo)
 
-Before that new cluster had finished building [Andy from Civo](https://twitter.com/andyjeffries) had, from his chair at 
-Kubecon, tracked down the issue, added code, tested his fix and deployed it into production. I was even able to spin up 
-a new cluster and connect using kubectl before my backup cluster was ready. That's fast... real fast. I owe Andy a drink 
-for that. 
-
-[![twitter image Andy fixing an issue FAST!](/images/civo-andy-tweet.png)](https://twitter.com/alistair_hey/status/1197601237505650688)
-
- 
-# The magic recipe?
-
-#### People
-From where I sit, as a user, Civo have an amazing team. Everyone is helpful, knowledgeable and committed. They also have 
-a great sense of humour, take the title image for this blog for example. 
-
-They got those cards printed for me and mailed them to me after the Kubecon fix. We were having a joke about a job title
-with as many of those toxic recruiter buzzword terms in them. They seem to have jammed a lot onto that small business 
-card. Well done...
-
-![civo-stickers](/images/civo-card.png)
-
-If a team are working together in this way then they can do great things! Good luck guys.
-
-#### Community
-
-Civo, as I have mentioned, are smashing this community thing. Keep is up guys!
-
-It's great to see their engagement with the community. This is a great way for them to improve the state of Cloud Native,
- a space that is rapidly expanding and where they are providing some great content, resources and products. 
-
-# Other cool k3s projects and tooling
-
-It wouldn't be right not to mention some of the other tools I'm finding really useful in this space.
-
-#### k3sup
-If you want to quickly spin up k3s clusters on your own hardware you can use [k3sup](https://k3sup.dev) to quickly 
-maintained by [Alex Ellis](https://twitter.com/alexellisuk) and has contributions from loads of other people (including 
-myself).
-
-I can create a new k3s cluster with just 3 commands: 
-
-First install a master k3s node like this:<br>
-```sh
-k3sup install --ip 192.168.0.10 --user pi 
-```
-
-Then join the two workers:<br>
-```sh
-k3sup join --ip 192.168.0.20 --server-ip 192.168.0.10 --user pi
-k3sup join --ip 192.168.0.30 --server-ip 192.168.0.10 --user pi
-```
-
-Then install some applications on my new cluster with k3sup
-
-```sh 
-k3sup app install openfaas
-k3sup app install cert-manager
-k3sup app install postgresql
-```
-
-It's that easy!
+(inbound webhooks)
+(blog posts)
+(sharing content with clients, friends, coworker)
+(Home lab (non k8s))
 
 
-#### k3d
-
-Rancher love containers, and k3s is no exception. There is a tool called [k3d](https://github.com/rancher/k3d) that 
-builds k3s clusters in docker containers. It's great for testing out stuff, then deleting the clusters once you're done. 
-Quick, easy, no fuss.
-
-```sh
-# Create a cluster
-k3d create
-
-# Connect to it
-export KUBECONFIG="$(k3d get-kubeconfig --name='k3s-default')"
-kubectl get nodes 
+# Have a go yourself
 
 
-# Remove your cluster 
-k3d delete
-```
 
-I used k3d a lot. If you have not used it then give it a try!
-
-# Thanks for reading!
-
-I am a consultant Cloud Native Engineer and programmer. I spend most of my spare time contributing to projects 
-like OpenFaaS, K3sup and Inlets.
-
-I left my full time job at the end of 2019 to start my own business advising companies on Digital Transformation, 
-DevOps and Cloud Native architecture.
-
-If your team has “a fear of deploying on a Friday” or is struggling with utilising the power of public cloud then I 
-would love to have a chat. 
-
-Don't be a stranger!
