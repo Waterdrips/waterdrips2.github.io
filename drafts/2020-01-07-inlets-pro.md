@@ -131,17 +131,69 @@ But for this post we will use both standard and pro features to show off as many
 (anywhere you need a public IP)
 (find that tweet from alex)
 (Production services, management of APIs in private VPCs, bastion hosts.   Prototyping, Demos, Home Lab, IoT)
+
 # Enough talk - time for action
 
 ### Setup
 
 We have already briefly looked at `inletsctl`, but we didnt discuss installation or setup. 
 
-> All of the commands shown are for linux and will probably work on Mac too. If you are using Windows then you are on your own
+> All of the commands shown are for linux and will probably work on Mac too. If you are using Windows then you should probably use git bash
 
-This is how we get started:
 
-(commands and screenshots for demo)
+Download and install inlets, inlets pro and inletsctl
+
+
+```sh 
+# Install Inletsctl to /usr/local/bin
+curl -sLSf https://inletsctl.inlets.dev | sudo s
+
+# Install Inlets to /usr/local/bin/
+curl -sLS https://get.inlets.dev | sudo sh
+
+# Install Inlets Pro
+curl -SLsf https://github.com/inlets/inlets-pro-pkg/releases/download/0.4.3/inlets-pro-linux > inlets-pro-linux
+chmod +x ./inlets-pro-linux
+sudo mv inlets-pro-linux /usr/local/bin/inlets-pro-linux
+
+```
+
+I'm using Digital Ocean for my exit nodes, you need to grab your Digital Ocean API Key if you are following along. 
+I have saved mine in a file called `do-token` in my home directory.
+
+
+Then we can create an exit node
+```sh
+
+inletsctl create --access-token-file ~/do-token
+
+```
+
+![example output from inletsctl create](/images/inletsctl-create.png)
+
+
+You should have some similar output to above, this is showing that we created a node and it's ready to be configured 
+to forward traffic. It's even helpfully given us the commands we need to run to get something configured.
+
+If you have docker installed you can do a quick test to see if it's working.
+
+```sh 
+docker run -p 8080:8080 --rm nginx:latest 
+
+
+export UPSTREAM=http://127.0.0.1:8080
+
+inlets client --remote "ws://<your-public-ip>:8080" \
+    --token "your-token" \
+    --upstream $UPSTREAM
+
+```
+
+You should have some output in your terminal that shows inlets client connecting to your exit server. You can now navigate to
+the public ip of your exit node. If you see the nginx splash page then we are all setup!
+
+
+![nginx splash page](/images/nginx-splash.png)
 
 (inbound webhooks)
 (blog posts)
