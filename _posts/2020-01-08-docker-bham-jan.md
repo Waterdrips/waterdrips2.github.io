@@ -11,7 +11,11 @@ Every 2 months a group of us host a meetup focused on Docker, You can find [the 
 
 We also have a slack for questions, sharing ideas and getting help. [This is how you join](https://join.slack.com/t/docker-birmingham/shared_invite/enQtMzc3MTAyMzYwMzg5LWIzYzlkY2FlNmJjZDk0NjgwMGNkMjM1ODVkNzU3M)
 
+#### Seeing as I have your attention
 
+We are hosting [February's CNCF Birmingham meetup on Wednesday 5th Feb](https://www.meetup.com/Cloud-Native-Birmingham/events/267773567/)
+and whilst we haven't finalised the speakers yet, it looks like it will be a good event! Hopefully we will see you there 
+too.
 
 # Building Docker images for multiple architectures
 
