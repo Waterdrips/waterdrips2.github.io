@@ -161,6 +161,7 @@ sudo mv inlets-pro-linux /usr/local/bin/inlets-pro-linux
 I'm using Digital Ocean for my exit nodes, you need to grab your Digital Ocean API Key if you are following along. 
 I have saved mine in a file called `do-token` in my home directory.
 
+If you want to use one of the other providers you can check the examples in the [inletsctl github repo](https://github.com/inlets/inletsctl/#examples-for-inletsctl-create).
 
 Then we can create an exit node
 ```sh
