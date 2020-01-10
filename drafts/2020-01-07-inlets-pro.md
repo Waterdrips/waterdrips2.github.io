@@ -124,18 +124,13 @@ If you just want to expose a service for http traffic you can use inlets. I use 
 blog posts, which are served from my laptop, out to the internet so my friends and family can proofread them. (I'm REALLY
 bad at spelling)
 
-But for this post we will use both standard and pro features to show off as many use cases as possible.
-
-
-# What can I use this for?
-(anywhere you need a public IP)
-(find that tweet from alex)
-(Production services, management of APIs in private VPCs, bastion hosts.   Prototyping, Demos, Home Lab, IoT)
+But for this post we will use both standard and pro features to show off as many use cases as I can think of.
 
 # Enough talk - time for action
 
 ### Setup
 
+#### Inlets 
 We have already briefly looked at `inletsctl`, but we didnt discuss installation or setup. 
 
 > All of the commands shown are for linux and will probably work on Mac too. If you are using Windows then you should probably use git bash
@@ -152,9 +147,9 @@ curl -sLSf https://inletsctl.inlets.dev | sudo s
 curl -sLS https://get.inlets.dev | sudo sh
 
 # Install Inlets Pro
-curl -SLsf https://github.com/inlets/inlets-pro-pkg/releases/download/0.4.3/inlets-pro-linux > inlets-pro-linux
-chmod +x ./inlets-pro-linux
-sudo mv inlets-pro-linux /usr/local/bin/inlets-pro-linux
+curl -SLsf https://github.com/inlets/inlets-pro-pkg/releases/download/0.4.3/inlets-pro > inlets-pro
+chmod +x ./inlets-pro
+sudo mv inlets-pro-linux /usr/local/bin/inlets-pro
 
 ```
 
@@ -179,13 +174,13 @@ to forward traffic. It's even helpfully given us the commands we need to run to 
 If you have docker installed you can do a quick test to see if it's working.
 
 ```sh 
-docker run -p 8080:8080 --rm nginx:latest 
+docker run --name nginx-test -d -p 8080:80 --rm nginx:latest 
 
 
 export UPSTREAM=http://127.0.0.1:8080
 
 inlets client --remote "ws://<your-public-ip>:8080" \
-    --token "your-token" \
+    --token "your-token-from-previous-output" \
     --upstream $UPSTREAM
 
 ```
@@ -196,13 +191,112 @@ the public ip of your exit node. If you see the nginx splash page then we are al
 
 ![nginx splash page](/images/nginx-splash.png)
 
-(inbound webhooks)
-(blog posts)
-(sharing content with clients, friends, coworker)
-(Home lab (non k8s))
+If that worked you can stop the docker container 
+
+```sh 
+docker stop nginx-test
+```
+
+
+Now we have validated our setup we can get into some real use cases! 
+
+## Webhooks
+
+
+## Exposing temporary services
+
+
+## Demos
+
+
+## Home Lab
+
+
+## IOT
+
+
+## Bastion hosts
+
+Sometimes you need to get access to resources in private networks. This could be a database cluster or your kubernetes 
+nodes for example. A common pattern is to have "SSH Bastions". These are machines that live within the network but have
+an inbound network route. This allows you to ssh onto these machines and then jump into internal parts of your network.
+
+Usually access to these machines is usually controlled by IP Whitelisting, using SSH Keys and . 
+
+We could add an extra layer of security into the mix here by not having any inbound network access to the machine. This 
+limits the discoverability of the service; If you have ever run SSH on a public IP you will be inundated by bots trying 
+weak username/password combinations. 
+
+This would look like this:
+
+<IMG of private network etc>
+
+
+#### A simple example
+So to set something like this up we can use `inlets-pro` and` inletsctl`. I will be running through a simple SSH example,
+but this could be applied to bastien hosts the same.
+
+
+I'm going to run the client on one of my Raspberry Pi computers with ssh enabled using key pairs only ([here is a Digita lOcean post on setting this up](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2))
+
+Once we are logged into our Pi on our local network we can setup the inlets-pro client to enable ssh access from the IP 
+of our exit node. We also need to change the default SSH port away from 22, as our exit-node will have ssh mapped to this
+port and we wont be able to use it.
+
+[Here is an article about changing the default ssh port](/home/heyal/code/waterdrips.github.io/drafts/2020-01-07-inlets-pro.md). 
+I used 2222, and will refer to that from now on.
+
+
+```sh 
+# Set this to the IP of the machine you want to expose on the web
+export RPI_IP=192.168.0.99 
+
+
+inletsctl create -f ~/do-token -c $RPI_IP
+```
+
+This gives you a command that looks like this to run on our client to forward the traffic
+
+```sh 
+Command:
+  export TCP_PORTS="8000"
+  export LICENSE="YOUR INLETS_PRO_LISENCE"
+  inlets-pro client --connect "wss://178.62.88.252:8123/connect" \
+        --token "a-long-random-string" \
+        --license "$LICENSE" \
+        --tcp-ports 8000
+```
+
+We need to forward port `2222`, so set this in the --tcp-ports section. Don't forget to set your inlets-pro licence key 
+in there too.
+
+The last step is starting the client on our Raspberry pi. SSH on there from your computer and run the following
+
+```sh 
+curl -SLsf https://github.com/inlets/inlets-pro-pkg/releases/download/0.4.3/inlets-pro-armhf > inlets-pro
+chmod +x ./inlets-pro
+
+# run the command we got easlier
+export LICENSE="YOUR INLETS_PRO_LISENCE"
+./inlets-pro client --connect "wss://178.62.88.252:8123/connect" \
+    --token "a-long-random-string" \
+    --license "$LICENSE" \
+    --tcp-ports 2222
+
+```
+
+
+If we have setup SSH correctly, and everything works as expected we should be able to ssh onto our Pi using the public IP
+```sh 
+ssh -p 2222 pi@178.62.88.252
+```
+
+![ssh in from the public internet](/images/rpi-inlets-pro.png)
+
 
 
 # Have a go yourself
 
-
-
+I'm sure there are loads of other things we could do with this. I would love to hear from you if you have any more great
+use cases. You can tweet me [@alistair_hey](https://twitter.com/alistair_hey) or use linkedin, github or email (links 
+should be at the bottom of the page)
