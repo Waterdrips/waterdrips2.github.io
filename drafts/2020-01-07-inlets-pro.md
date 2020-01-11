@@ -141,15 +141,13 @@ Download and install inlets, inlets pro and inletsctl
 
 ```sh 
 # Install Inletsctl to /usr/local/bin
-curl -sLSf https://inletsctl.inlets.dev | sudo s
+curl -sLSf https://inletsctl.inlets.dev | sudo sh
 
-# Install Inlets to /usr/local/bin/
-curl -sLS https://get.inlets.dev | sudo sh
+# Install Inlets 
+sudo inletsctl download
 
 # Install Inlets Pro
-curl -SLsf https://github.com/inlets/inlets-pro-pkg/releases/download/0.4.3/inlets-pro > inlets-pro
-chmod +x ./inlets-pro
-sudo mv inlets-pro-linux /usr/local/bin/inlets-pro
+sudo inletsctl download --pro
 
 ```
 
