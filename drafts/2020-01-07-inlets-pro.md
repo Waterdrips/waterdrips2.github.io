@@ -92,6 +92,9 @@ My most viewed tweet so far is this
 
 ![inlets tweet](/images/inlets-tweet.png)
 
+I'm not sure I fully get why people seem to love tunneling network traffic into places where it's either specifically 
+disallowed (Corporate networks) or places that it makes 
+
 # Why Inlets Pro?
 
 Inlets Pro is a commercial extension to inlets, you can [try it out and contact OpenFaaS for more information](https://github.com/inlets/inlets-pro-pkg#getting-a-license-key--more-info)
@@ -115,16 +118,15 @@ These are some of the [features](https://github.com/inlets/inlets-pro-pkg/#featu
 * systemd support and automatic retries
 * Kubernetes compatible
 
-What am I using that normal inlets can't do? 
-* Non HTTP traffic (SSH and Postgres)
-* TLS pass-through (Terminating TLS at the process rather than the exit node)
-* systemd support
-
 If you just want to expose a service for http traffic you can use inlets. I use standard inlets when proxying my draft 
 blog posts, which are served from my laptop, out to the internet so my friends and family can proofread them. (I'm REALLY
 bad at spelling)
 
-But for this post we will use both standard and pro features to show off as many use cases as I can think of.
+But for this post we will use both standard and pro features to show off as many use cases as possible.
+
+<br>
+
+---
 
 # Enough talk - time for action
 
@@ -198,22 +200,92 @@ docker stop nginx-test
 
 Now we have validated our setup we can get into some real use cases! 
 
-## Webhooks
+
+Broadly my use cases are split into HTTP traffic, and non HTTP traffic. The example commands to forward these two 
+categories of traffic are the same for each example in the category, so I will show some example uses, and then the 
+commands needed to get inlets, or inlets-pro, working.
+
+<br>
+
+---
+
+## HTTP based services
 
 
-## Exposing temporary services
+### Webhooks
+
+Loads of services we build
+
+### Exposing temporary services
+
+Let's suppose you are working remotely on a set of microservices, your colleague wants to test his new front-end against
+your backend service, this means committing, raising a PR and getting code into a development or staging environment to 
+properly test. Alternatively they could pull your code, build and deploy that service themselves. 
+
+Problem is, both of these are a hassle. We like things to be easy! You get some free user testing, potentially catch a 
+bug before your code even makes it into PR, your colleague gets a service provided by the person building it, without 
+having to do anything. Sounds good.
+
+All you need to do is expose your service using inlets. The commands to do this are later in the section.
+
+### Demos
+
+It's always cool to give access to the demo services and websites you are making to the "users", this could be the product
+owner, client or your business partner. 
+
+Without using something like inlets available you would need to deploy your application up to a machine that had a public
+IP, configure the service and then remember to keep that up-to-date. You would also need to go off to that machine to get
+logs. Having this instance running costs you money and takes away valuable time during the early product development 
+stages.
+
+Using inlets we can expose a local service to the internet in less than a minute, and when we are done we can tear 
+everything down again, meaning we can create on-demand tunnels, only pay for what we use and spend more time where it 
+matters; creating value for our customers.
+
+I can deploy a local copy of my blog using docker-compose, that updates when files change and allows me to see what my 
+changes will look like without publishing to the rest of the world.
 
 
-## Demos
+### The commands
+Let's look at the last example above, my personal blog in development mode. 
+
+I can expose my service to `http://127.0.0.1:4000` by running `docker-compose up`. This stands up a container that 
+publishes to port 4000 on my local machine.
+
+Using the exit-node we created earlier we can setup an inbound network route to my blog like this
+
+```sh 
+export UPSTREAM=http://127.0.0.1:4000
+
+inlets client --remote "ws://<your-public-ip>:8080" \
+    --token "your-token-from-setup=stage" \
+    --upstream $UPSTREAM
+```
+
+My local service will be accessible at the remote ip. That's it, all that's needed. 
+
+You can substitute the port on the `UPSTREAM` environment variable if your service is uing a different port, for port 
+5000 for example:
+
+```
+export UPSTREAM=http://127.0.0.1:5000
+```
+
+Then we just run the `inlets` command again.
+
+<br>
+
+---
+
+## Non-HTTP based services
+
+### Home Lab
 
 
-## Home Lab
+### IOT
 
 
-## IOT
-
-
-## Bastion hosts
+### Bastion hosts
 
 Sometimes you need to get access to resources in private networks. This could be a database cluster or your kubernetes 
 nodes for example. A common pattern is to have "SSH Bastions". These are machines that live within the network but have
@@ -227,15 +299,17 @@ weak username/password combinations.
 
 This would look like this:
 
-<IMG of private network etc>
+> IMG of private network etc
+
+---
+
+### An example, SSH
+
+So to set up TCP forwarding we can use `inlets-pro` and` inletsctl`. I will be running through a simple SSH example,
+but this could be applied to any of the non-HTTP examples in the same way.
 
 
-#### A simple example
-So to set something like this up we can use `inlets-pro` and` inletsctl`. I will be running through a simple SSH example,
-but this could be applied to bastien hosts the same.
-
-
-I'm going to run the client on one of my Raspberry Pi computers with ssh enabled using key pairs only ([here is a Digita lOcean post on setting this up](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2))
+I'm going to run the client on one of my Raspberry Pi computers with ssh enabled using key pairs only ([here is a Digital Ocean post on setting this up](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2))
 
 Once we are logged into our Pi on our local network we can setup the inlets-pro client to enable ssh access from the IP 
 of our exit node. We also need to change the default SSH port away from 22, as our exit-node will have ssh mapped to this
@@ -257,32 +331,18 @@ This gives you a command that looks like this to run on our client to forward th
 
 ```sh 
 Command:
-  export TCP_PORTS="8000"
+  export TCP_PORTS="2222"
   export LICENSE="YOUR INLETS_PRO_LISENCE"
   inlets-pro client --connect "wss://178.62.88.252:8123/connect" \
         --token "a-long-random-string" \
         --license "$LICENSE" \
-        --tcp-ports 8000
+        --tcp-ports $TCP_PORTS
 ```
 
-We need to forward port `2222`, so set this in the --tcp-ports section. Don't forget to set your inlets-pro licence key 
-in there too.
+We need to forward port `2222`, so set this in the `TCP_PORTS` variable. Don't forget to set your inlets-pro licence key 
+too.
 
-The last step is starting the client on our Raspberry pi. SSH on there from your computer and run the following
-
-```sh 
-curl -SLsf https://github.com/inlets/inlets-pro-pkg/releases/download/0.4.3/inlets-pro-armhf > inlets-pro
-chmod +x ./inlets-pro
-
-# run the command we got easlier
-export LICENSE="YOUR INLETS_PRO_LISENCE"
-./inlets-pro client --connect "wss://178.62.88.252:8123/connect" \
-    --token "a-long-random-string" \
-    --license "$LICENSE" \
-    --tcp-ports 2222
-
-```
-
+The last step is starting the client on our Raspberry pi. SSH on there from your computer and run the command!
 
 If we have setup SSH correctly, and everything works as expected we should be able to ssh onto our Pi using the public IP
 ```sh 
