@@ -14,7 +14,7 @@ image_alt: inlets pro headline image
 # What is inlets?
 Inlets is a reverse proxy written and maintained by [Alex Ellis](https://twitter.com/alexellisuk) and the github community.
 
-This means you can use it to create inbound network tunnels to computers that dont have a public ip, are behind firewalls
+This means you can use it to create inbound network tunnels to computers that don't have a public ip, are behind firewalls
 or get assigned new IPs frequently. Things like your laptop when you move from the office to a coffee shop. While writing 
 this post I have probably been on 5 different networks, but still been able to connect to my laptop's [k3d](https://github.com/rancher/k3d) 
 cluster using the same public IP address.
@@ -25,7 +25,7 @@ section. It's cloud native!
 
 ![Inlets Cloud NAtive card](/images/cncf-inlets.png)
 
-There are plenty of freemium services out there that will give you inbound network access to processes that dont have 
+There are plenty of freemium services out there that will give you inbound network access to processes that don't have 
 inbound connectivity, but most of these services are in control of your data, rate limit and are closed source. Inlets 
 gives you back control of your data, privacy and lets you run the service in the way you want. 
 
@@ -65,26 +65,26 @@ There are some great blog posts already about setting up inlets without the CLI
  - [Setting up an EC2 Instance as an Inlets Exit Node](https://mbacchi.github.io/2019/08/21/inlets-aws-ec2.html) - Matt Bacchi
  
 Therefore I wont be focusing on this, instead we will focus on the why and the what of inlets.
-## Before you get started
+#### Before you get started
 
-Its probably best to say that if you are using a corporate network, or any network you aren't responsible for, you should
+It's probably best to say that if you are using a corporate network, or any network you aren't responsible for, you should
 ensure you have permission to start routing inbound internet traffic. It goes without saying that this exposes the network 
 to extra risk and could drastically increase the network attack surface.
 
 ## inlets-operator 
 
-I'm using Kubernetes and can't forward every process from every node... 
+> I'm using Kubernetes and can't forward every deployment, that would take ages...
 
-Not to worry, the [inlets-operator](https://github.com/inlets/inlets-operator) has your back. Using this 
+Not to worry, the [inlets-operator](https://github.com/inlets/inlets-operator) has your back.
 
 The operator automates the creation of an inlets exit-node on public cloud, and runs the client as a Pod inside your 
 cluster. Your Kubernetes Service will be updated with the public IP of the exit-node and you can start receiving 
 incoming traffic immediately. 
 
-I have written a separate post on the inlets operator that you should read if you are using Kubernetes somewhere where 
-you dont have inbound network traffic. Like k3s/k3d/minikube/microk8s/Docker Desktop/KinD.
+I have am writing a separate post on the inlets operator, It has a much more specific usecase if using Kubernetes
+somewhere that you don't have inbound network traffic. Like k3s/k3d/minikube/microk8s/Docker Desktop/KinD. 
 
-[You can read it here](/inlets-operator/)
+It's worth exploring if you need to expose your local kubernetes services, for example to give a demo or collaborate.
 
 # People LOVE reverse proxies
 
@@ -214,7 +214,12 @@ commands needed to get inlets, or inlets-pro, working.
 
 ### Webhooks
 
-Loads of services we build
+Wile developing [OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud) we rely on webhooks to let us know when new
+code has been pushed, and therefore when to run new builds.
+
+This is easy with inlets, we just forward the webhooks through an inlets exit-node to our local machine, this means we 
+can build our services locally without having to push containers up to registries and pull them back down in a remote
+kubernetes cluster. This saves us loads of time and bandwidth. 
 
 ### Exposing temporary services
 
@@ -277,12 +282,28 @@ Then we just run the `inlets` command again.
 
 ---
 
-## Non-HTTP based services
+## Non-HTTP based services (inlets pro)
 
 ### Home Lab
 
+I didn't know if I should have put Home Lab under HTTP services, but I decided it probably lives under the inlets-pro 
+section, I personally use mainly HTTP, but do have an SSH Tunnel open from time-to-time to allow configuration of the 
+resources from outside my home network.
 
-### IOT
+You might be collaborating with someone who doesn't have their own resources, or computer with particular chipset. So 
+it's useful to be able to open these up to trusted parties via the internet. 
+
+Here's an example from the inlets author
+
+![Inlets tweet about sharing rpi using inlets](/images/inlets-rpi.png)
+
+
+### IoT
+
+You could open a reverse tunnel to configure, update and change the software running on IoT Devices no-matter where they
+are, provided they have outbound network connectivity.
+
+This could be a really good way to deliver updates to IoT devices. 
 
 
 ### Bastion hosts
@@ -299,7 +320,7 @@ weak username/password combinations.
 
 This would look like this:
 
-> IMG of private network etc
+![inbound proxy diagram](/images/inbound-proxy.png)
 
 ---
 
@@ -323,8 +344,7 @@ I used 2222, and will refer to that from now on.
 # Set this to the IP of the machine you want to expose on the web
 export RPI_IP=192.168.0.99 
 
-
-inletsctl create -f ~/do-token -c $RPI_IP
+inletsctl create --access-token-file ~/do-token --remote-tcp $RPI_IP
 ```
 
 This gives you a command that looks like this to run on our client to forward the traffic
@@ -351,6 +371,9 @@ ssh -p 2222 pi@178.62.88.252
 
 ![ssh in from the public internet](/images/rpi-inlets-pro.png)
 
+
+This example should work for any service that uses TCP. You will just need to edit the `TCP_PORTS` environment variable
+and re-run the client command to forward different ports.
 
 
 # Have a go yourself
