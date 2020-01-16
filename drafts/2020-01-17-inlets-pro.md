@@ -2,7 +2,7 @@
 layout: post
 title: Inlets and Inlets Pro
 description: Give anything a public IP with inlets and inlets pro
-date: 07-01-2020
+date: 17-01-2020
 image: inlets-home.jpg
 image_alt: inlets pro headline image
 ---
@@ -12,22 +12,26 @@ image_alt: inlets pro headline image
 
 
 # What is inlets?
-Inlets is a reverse proxy written and maintained by [Alex Ellis](https://twitter.com/alexellisuk) and the github community.
+Inlets is a reverse proxy and service tunnel written in Go.
 
-This means you can use it to create inbound network tunnels to computers that don't have a public ip, are behind firewalls
+This means you can use it to create inbound network tunnels to computers that don't have a public IP, are behind firewalls
 or get assigned new IPs frequently. Things like your laptop when you move from the office to a coffee shop. While writing 
 this post I have probably been on 5 different networks, but still been able to connect to my laptop's [k3d](https://github.com/rancher/k3d) 
 cluster using the same public IP address.
 
 ## Why inlets
-It's on the [CNCF](https://cncf.io) landscape in the [Service Proxy](https://landscape.cncf.io/category=service-proxy&format=card-mode&grouping=category)
+It's on the  landscape in the 
 section. It's cloud native!
+inlets has a place on the Cloud Native Computing Foundation ([CNCF](https://cncf.io))’s technology landscape. It’s in the
+[Service Proxy](https://landscape.cncf.io/category=service-proxy&format=card-mode&grouping=category)  category along 
+with MetalLB, Traefik, HAProxy and Nginx.
 
 ![Inlets Cloud NAtive card](/images/cncf-inlets.png)
 
 There are plenty of freemium services out there that will give you inbound network access to processes that don't have 
 inbound connectivity, but most of these services are in control of your data, rate limit and are closed source. Inlets 
 gives you back control of your data, privacy and lets you run the service in the way you want. 
+# TODO list some examples,. see Alex's post
 
 With cloud VMs starting at $5 with heaps of inbound data transfer there's no need to pay 10s of dollars a month for someone else 
 to run a limited service for you. 
@@ -35,18 +39,46 @@ to run a limited service for you.
 ## How it works
 
 Inlets creates a tunnel from your local process to a public cloud instance (or anything that can accept inbound traffic).
-I have been using digital ocean's smallest VMs as my exit nodes. However, you can setup inlets using anything that can be 
+I have been using digital ocean's smallest VMs as my exit nodes. However, you can set up inlets using anything that can be 
 accessed from both the internet, and the application or process you want to expose. 
 
 ## inletsctl
 
 There is a handy CLI for managing your inlets services called [inletsctl](https://github.com/inlets/inletsctl).
-I will be using this cli throughout the post as it simplifies the process of getting things setup and configured. 
+I will be using this cli throughout the post as it simplifies the process of getting things set up and configured. 
+
+```sh 
+ _       _      _            _   _ 
+(_)_ __ | | ___| |_ ___  ___| |_| |
+| | '_ \| |/ _ \ __/ __|/ __| __| |
+| | | | | |  __/ |_\__ \ (__| |_| |
+|_|_| |_|_|\___|\__|___/\___|\__|_|
 
 
-![inletsctl basic command](/images/inletsctl.png)
+inletsctl can create exit nodes for you on your preferred cloud provider
+so that you can run a single command and then connect with your inlets
+client.
 
-The creat command automates the provisioning, setup and configuration of the publicly accessible exit-node using cloud 
+See also: inlets-operator for Kubernetes and inlets-pro for TCP tunnelling.
+
+Usage:
+  inletsctl [flags]
+  inletsctl [command]
+
+Available Commands:
+  create      Create an exit node
+  delete      Delete an exit node
+  help        Help about any command
+  kfwd        Forward a Kubernetes service to the local machine
+  version     Display the clients version information.
+
+Flags:
+  -h, --help   help for inletsctl
+
+Use "inletsctl [command] --help" for more information about a command.
+```
+
+The create command automates the provisioning, setup and configuration of the publicly accessible exit-node using cloud 
 instances.
 
 Currently supported providers:
@@ -56,7 +88,7 @@ Currently supported providers:
 * Google Cloud
 * Packet
 
-You will need your own account, and will incur costs, with whichever provider you use if you are following along.
+You will need your own account and will incur costs with whichever provider you use if you are following along.
 
 
 There are some great blog posts already about setting up inlets without the CLI
@@ -64,7 +96,7 @@ There are some great blog posts already about setting up inlets without the CLI
  - [HTTPS for your local endpoints with inlets and Caddy](https://blog.alexellis.io/https-inlets-local-endpoints/) - Alex Ellis
  - [Setting up an EC2 Instance as an Inlets Exit Node](https://mbacchi.github.io/2019/08/21/inlets-aws-ec2.html) - Matt Bacchi
  
-Therefore I wont be focusing on this, instead we will focus on the why and the what of inlets.
+Therefore I won't be focusing on this, instead we will focus on the why and the what of inlets.
 #### Before you get started
 
 It's probably best to say that if you are using a corporate network, or any network you aren't responsible for, you should
@@ -81,7 +113,7 @@ The operator automates the creation of an inlets exit-node on public cloud, and 
 cluster. Your Kubernetes Service will be updated with the public IP of the exit-node and you can start receiving 
 incoming traffic immediately. 
 
-I have am writing a separate post on the inlets operator, It has a much more specific usecase if using Kubernetes
+I have been writing a separate post on the inlets operator. It has a much more specific usecase if using Kubernetes
 somewhere that you don't have inbound network traffic. Like k3s/k3d/minikube/microk8s/Docker Desktop/KinD. 
 
 It's worth exploring if you need to expose your local kubernetes services, for example to give a demo or collaborate.
@@ -92,8 +124,8 @@ My most viewed tweet so far is this
 
 ![inlets tweet](/images/inlets-tweet.png)
 
-I'm not sure I fully get why people seem to love tunneling network traffic into places where it's either specifically 
-disallowed (Corporate networks) or places that it makes 
+I'm not sure I fully get why people seem to love tunneling network traffic into networks where it's either specifically 
+disallowed (Corporate networks).
 
 # Why Inlets Pro?
 
@@ -164,7 +196,6 @@ Then we can create an exit node
 inletsctl create --access-token-file ~/do-token
 
 ```
-
 ![example output from inletsctl create](/images/inletsctl-create.png)
 
 
@@ -178,15 +209,13 @@ docker run --name nginx-test -d -p 8080:80 --rm nginx:latest
 
 
 export UPSTREAM=http://127.0.0.1:8080
-
-inlets client --remote "ws://<your-public-ip>:8080" \
-    --token "your-token-from-previous-output" \
-    --upstream $UPSTREAM
-
+inlets client --remote "ws://157.245.37.54:8080" \
+      --token "fzjFpqorbwS4Zi06CQNxeSNOorlEk2z4qteh6ybCTHmOwvPcHL25hunDrHM5K5zw" \
+      --upstream $UPSTREAM
 ```
 
 You should have some output in your terminal that shows inlets client connecting to your exit server. You can now navigate to
-the public ip of your exit node. If you see the nginx splash page then we are all setup!
+the public IP of your exit node. If you see the nginx splash page then we are all set up!
 
 
 ![nginx splash page](/images/nginx-splash.png)
@@ -202,8 +231,8 @@ Now we have validated our setup we can get into some real use cases!
 
 
 Broadly my use cases are split into HTTP traffic, and non HTTP traffic. The example commands to forward these two 
-categories of traffic are the same for each example in the category, so I will show some example uses, and then the 
-commands needed to get inlets, or inlets-pro, working.
+categories of traffic are the same, so I will show some example uses and then the 
+commands needed to get inlets or inlets-pro working.
 
 <br>
 
@@ -223,7 +252,7 @@ kubernetes cluster. This saves us loads of time and bandwidth.
 
 ### Exposing temporary services
 
-Let's suppose you are working remotely on a set of microservices, your colleague wants to test his new front-end against
+Let's suppose you are working remotely on a set of microservices, your colleague wants to test their new front-end against
 your backend service, this means committing, raising a PR and getting code into a development or staging environment to 
 properly test. Alternatively they could pull your code, build and deploy that service themselves. 
 
@@ -245,7 +274,7 @@ stages.
 
 Using inlets we can expose a local service to the internet in less than a minute, and when we are done we can tear 
 everything down again, meaning we can create on-demand tunnels, only pay for what we use and spend more time where it 
-matters; creating value for our customers.
+matters, creating value for our customers.
 
 I can deploy a local copy of my blog using docker-compose, that updates when files change and allows me to see what my 
 changes will look like without publishing to the rest of the world.
@@ -257,19 +286,19 @@ Let's look at the last example above, my personal blog in development mode.
 I can expose my service to `http://127.0.0.1:4000` by running `docker-compose up`. This stands up a container that 
 publishes to port 4000 on my local machine.
 
-Using the exit-node we created earlier we can setup an inbound network route to my blog like this
+Using the exit-node we created earlier we can set up an inbound network route to my blog like this
 
 ```sh 
 export UPSTREAM=http://127.0.0.1:4000
 
-inlets client --remote "ws://<your-public-ip>:8080" \
-    --token "your-token-from-setup=stage" \
-    --upstream $UPSTREAM
+inlets client --remote "ws://157.245.37.54:8080" \
+      --token "fzjFpqorbwS4Zi06CQNxeSNOorlEk2z4qteh6ybCTHmOwvPcHL25hunDrHM5K5zw" \
+      --upstream $UPSTREAM
 ```
 
 My local service will be accessible at the remote ip. That's it, all that's needed. 
 
-You can substitute the port on the `UPSTREAM` environment variable if your service is uing a different port, for port 
+You can substitute the port on the `UPSTREAM` environment variable if your service is using a different port, 
 5000 for example:
 
 ```
@@ -315,7 +344,7 @@ an inbound network route. This allows you to ssh onto these machines and then ju
 Usually access to these machines is usually controlled by IP Whitelisting, using SSH Keys and . 
 
 We could add an extra layer of security into the mix here by not having any inbound network access to the machine. This 
-limits the discoverability of the service; If you have ever run SSH on a public IP you will be inundated by bots trying 
+limits the discoverability of the service. If you have ever run SSH on a public IP you will be inundated by bots trying 
 weak username/password combinations. 
 
 This would look like this:
@@ -332,11 +361,11 @@ but this could be applied to any of the non-HTTP examples in the same way.
 
 I'm going to run the client on one of my Raspberry Pi computers with ssh enabled using key pairs only ([here is a Digital Ocean post on setting this up](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2))
 
-Once we are logged into our Pi on our local network we can setup the inlets-pro client to enable ssh access from the IP 
+Once we are logged into our Pi on our local network we can set up the inlets-pro client to enable ssh access from the IP 
 of our exit node. We also need to change the default SSH port away from 22, as our exit-node will have ssh mapped to this
-port and we wont be able to use it.
+port and we won't be able to use it.
 
-[Here is an article about changing the default ssh port](/home/heyal/code/waterdrips.github.io/drafts/2020-01-07-inlets-pro.md). 
+[Here is an article about changing the default ssh port](https://uk.godaddy.com/help/changing-the-ssh-port-for-your-linux-server-7306)
 I used 2222, and will refer to that from now on.
 
 
@@ -349,14 +378,13 @@ inletsctl create --access-token-file ~/do-token --remote-tcp $RPI_IP
 
 This gives you a command that looks like this to run on our client to forward the traffic
 
-```sh 
-Command:
-  export TCP_PORTS="2222"
-  export LICENSE="YOUR INLETS_PRO_LISENCE"
-  inlets-pro client --connect "wss://178.62.88.252:8123/connect" \
-        --token "a-long-random-string" \
-        --license "$LICENSE" \
-        --tcp-ports $TCP_PORTS
+```sh
+export TCP_PORTS="2222"
+export LICENSE="YOUR INLETS_PRO_LISENCE"
+inlets-pro client --connect "wss://178.62.88.252:8123/connect" \
+    --token "a-long-random-string" \
+    --license "$LICENSE" \
+    --tcp-ports $TCP_PORTS
 ```
 
 We need to forward port `2222`, so set this in the `TCP_PORTS` variable. Don't forget to set your inlets-pro licence key 
@@ -364,7 +392,7 @@ too.
 
 The last step is starting the client on our Raspberry pi. SSH on there from your computer and run the command!
 
-If we have setup SSH correctly, and everything works as expected we should be able to ssh onto our Pi using the public IP
+If we have set up SSH correctly, and everything works as expected we should be able to ssh onto our Pi using the public IP
 ```sh 
 ssh -p 2222 pi@178.62.88.252
 ```
@@ -377,6 +405,11 @@ and re-run the client command to forward different ports.
 
 
 # Have a go yourself
+
+Check out the various things on github
+* [inlets](https://github.com/inlets/inlets)
+* [inlets-pro](https://github.com/inlets/inlets-pro-pkg)
+* [inletsctl](https://github.com/inlets/inletsctl)
 
 I'm sure there are loads of other things we could do with this. I would love to hear from you if you have any more great
 use cases. You can tweet me [@alistair_hey](https://twitter.com/alistair_hey) or use linkedin, github or email (links 
