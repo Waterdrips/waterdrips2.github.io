@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Inlets and Inlets Pro
+title: Exploring NAT Traversal and Tunnels with Inlets and Inlets Pro
 description: Give anything a public IP with inlets and inlets pro
 date: 20-01-2020
 image: inlets-home.jpg
