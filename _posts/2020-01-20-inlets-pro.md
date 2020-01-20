@@ -2,7 +2,7 @@
 layout: post
 title: Inlets and Inlets Pro
 description: Give anything a public IP with inlets and inlets pro
-date: 17-01-2020
+date: 20-01-2020
 image: inlets-home.jpg
 image_alt: inlets pro headline image
 ---
@@ -11,8 +11,15 @@ image_alt: inlets pro headline image
 ![Street Sign with 127.0.0.1](/images/inlets-home.jpg)
 
 
-# What is inlets?
-Inlets is a reverse proxy and service tunnel written in Go.
+# Inlets! What is it?
+inlets is a reverse proxy and service tunnel written in Go.
+
+This is the section from the [inlet's github README](https://github.com/inlets/inlets#inlets)
+> inlets combines a reverse proxy and websocket tunnels to expose your internal and development endpoints to the public Internet via an exit-node. An exit-node may be a 5-10 USD VPS or any other computer with an IPv4 IP address.
+>
+> Why do we need this project? Similar tools such as ngrok or Argo Tunnel from Cloudflare are closed-source, have limits built-in, can work out expensive, and have limited support for arm/arm64. Ngrok is also often banned by corporate firewall policies meaning it can be unusable. Other open-source tunnel tools are designed to only set up a single static tunnel. inlets aims to dynamically bind and discover your local services to DNS entries with automated TLS certificates to a public IP address over a websocket tunnel.
+>
+> When combined with SSL - inlets can be used with any corporate HTTP proxy which supports CONNECT.
 
 This means you can use it to create inbound network tunnels to computers that don't have a public IP, are behind firewalls
 or get assigned new IPs frequently. Things like your laptop when you move from the office to a coffee shop. While writing 
@@ -31,7 +38,10 @@ with MetalLB, Traefik, HAProxy and Nginx.
 There are plenty of freemium services out there that will give you inbound network access to processes that don't have 
 inbound connectivity, but most of these services are in control of your data, rate limit and are closed source. Inlets 
 gives you back control of your data, privacy and lets you run the service in the way you want. 
-# TODO list some examples,. see Alex's post
+
+We have already mentioned a few services like Ngrok and Argo Tunnel, but they are closed source and have severe service
+restrictions, plus you are not fully in control of the service.
+
 
 With cloud VMs starting at $5 with heaps of inbound data transfer there's no need to pay 10s of dollars a month for someone else 
 to run a limited service for you. 
@@ -97,6 +107,7 @@ There are some great blog posts already about setting up inlets without the CLI
  - [Setting up an EC2 Instance as an Inlets Exit Node](https://mbacchi.github.io/2019/08/21/inlets-aws-ec2.html) - Matt Bacchi
  
 Therefore I won't be focusing on this, instead we will focus on the why and the what of inlets.
+
 #### Before you get started
 
 It's probably best to say that if you are using a corporate network, or any network you aren't responsible for, you should
