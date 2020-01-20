@@ -254,7 +254,7 @@ commands needed to get inlets or inlets-pro working.
 
 ### Webhooks
 
-Wile developing [OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud) we rely on webhooks to let us know when new
+While developing [OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud) we rely on webhooks to let us know when new
 code has been pushed, and therefore when to run new builds.
 
 This is easy with inlets, we just forward the webhooks through an inlets exit-node to our local machine, this means we 
