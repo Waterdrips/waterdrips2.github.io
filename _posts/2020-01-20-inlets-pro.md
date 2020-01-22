@@ -417,10 +417,10 @@ and re-run the client command to forward different ports.
 
 # Have a go yourself
 
-Check out the various things on github
-* [inlets](https://github.com/inlets/inlets)
-* [inlets-pro](https://github.com/inlets/inlets-pro-pkg)
-* [inletsctl](https://github.com/inlets/inletsctl)
+Check out each of the tools we have looked at on github
+* [inlets](https://github.com/inlets/inlets) - the HTTP tunnel
+* [inlets-pro](https://github.com/inlets/inlets-pro-pkg) - the TCP tunnel
+* [inletsctl](https://github.com/inlets/inletsctl) - The cli tool we use to speed up provisioning servers
 
 I'm sure there are loads of other things we could do with this. I would love to hear from you if you have any more great
 use cases. You can tweet me [@alistair_hey](https://twitter.com/alistair_hey) or use linkedin, github or email (links 
