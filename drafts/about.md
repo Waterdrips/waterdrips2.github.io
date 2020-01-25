@@ -32,7 +32,6 @@ DevOps and Cloud Native architecture.
 If your team has "a fear of deploying on a Friday" or is struggling with utilising the power of public cloud then I 
 would love to have a chat about how you can start to move in a new direction.
 
-
 My main focus areas are:
 * Infrastructure as Code
 * Cloud Native architecture
