@@ -26,9 +26,6 @@ organisational structures, where
 
 ### More Information
 
-I left my full time job at the end of 2019 to start my own business advising companies on Digital Transformation, 
-DevOps and Cloud Native architecture. 
-
 If your team has "a fear of deploying on a Friday" or is struggling with utilising the power of public cloud then I 
 would love to have a chat about how you can start to move in a new direction.
 
