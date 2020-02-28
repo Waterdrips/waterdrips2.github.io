@@ -64,7 +64,7 @@ $ arkade install openfaas
 ```
 
 
-However, im going to set an overide for the Helm installation, so our functions scale down to 0 when they are idle, saving 
+However, I'm going to set an override for the Helm installation, so our functions scale down to 0 when they are idle, saving 
 cluster resources. In the full helm command we would use `--set faasIdler.dryRun=false`, as you can see from the command below
 we just pass the same flag in. Easy as that!
 
