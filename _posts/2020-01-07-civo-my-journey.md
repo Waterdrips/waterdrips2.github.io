@@ -169,9 +169,9 @@ It's great to see their engagement with the community. This is a great way for t
 It wouldn't be right not to mention some of the other tools I'm finding really useful in this space.
 
 #### k3sup
-If you want to quickly spin up k3s clusters on your own hardware you can use [k3sup](https://k3sup.dev) to quickly 
+If you want to quickly spin up k3s clusters on your own hardware you can use [k3sup](https://k3sup.dev) to quickly build clusters and install
 maintained by [Alex Ellis](https://twitter.com/alexellisuk) and has contributions from loads of other people (including 
-myself).
+myself). 
 
 I can create a new k3s cluster with just 3 commands: 
 
@@ -186,12 +186,17 @@ k3sup join --ip 192.168.0.20 --server-ip 192.168.0.10 --user pi
 k3sup join --ip 192.168.0.30 --server-ip 192.168.0.10 --user pi
 ```
 
-Then install some applications on my new cluster with k3sup
+
+#### Arkade
+[arkade](https://get-arkade.dev) is a kubernetes app installer, it can use used to quickly install apps with a set of default config, maintained
+by Alex Ellis
+
+You can get it by following instructions on the github README then install some applications on my new cluster with arkade
 
 ```sh 
-k3sup app install openfaas
-k3sup app install cert-manager
-k3sup app install postgresql
+arkade install openfaas
+arkade install cert-manager
+arkade install postgresql
 ```
 
 It's that easy!
