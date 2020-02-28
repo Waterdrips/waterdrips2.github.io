@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Introducing Arkade - the kubernetes app installer
+title: Introducing Arkade - The Kubernetes app installer
 description: A CLI with strongly-typed flags to install charts and apps to your cluster in one command.
 date: 28-02-2020
 image: arkade-logo.png
