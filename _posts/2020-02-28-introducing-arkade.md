@@ -54,7 +54,7 @@ Wow! That's a lot of apps!
 
 #### Let's take a look 
 The arkade cli is the [easiest installation method for OpenFaaS on kubernetes](https://docs.openfaas.com/deployment/kubernetes/#a-deploy-with-arkade-fastest-option).
-I'm going to show you just how easy it is to get OpenFaaS installed and ready to work using this cli. 
+I am going to show you just how easy it is to get OpenFaaS installed and ready to work using this cli. 
  
 I have a Kubernetes cluster on Digital Ocean ready to go, with kubectl configured on my laptop and ready to go.
 

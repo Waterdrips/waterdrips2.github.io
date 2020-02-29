@@ -7,7 +7,9 @@ image: inlets-home.jpg
 image_alt: inlets pro headline image
 ---
 
+# The Inlets Operator
 
-(openfaas cloud with tls on my home cluster)
-(Home Rpi k3s cluster)
-(cluster to cluster)
+
+
+
+
