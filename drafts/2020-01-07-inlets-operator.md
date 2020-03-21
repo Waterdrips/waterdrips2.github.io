@@ -9,6 +9,8 @@ image_alt: inlets pro headline image
 
 # The Inlets Operator
 
+Last week I write a quick blog post about installing OpenFaaS onto kubernetes using `arkade`.
+
 
 
 
