@@ -16,7 +16,7 @@ If your team has "a fear of deploying on a Friday" or is struggling with utilisi
 would love to have a chat about how you can start to move in a new direction.
 
 
-My main focus areas are:
+My focus areas are:
 * Infrastructure as Code
 * Cloud Native architecture
 * Creating a DevOps Culture
