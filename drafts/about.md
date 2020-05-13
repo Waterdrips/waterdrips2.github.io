@@ -13,12 +13,14 @@ With more companies moving to the cloud and unlocking the potential that code dr
 it's becoming more important to develop our systems to leverage the flexibility of the cloud without locking ourselves 
 down to specific vendors, integrations and ways of working.
 
-All the flexibility and configurability that comes with utilising the cloud, and cloud native patterns comes at a cost. 
+All the flexibility and configurability that comes with utilising the cloud, and cloud native patterns come at a cost. 
 That cost is complexity, that could manifest its self as architectural complexity, code complexity or deployment 
 complexity. It could be many more things too.
 
 This could come down to [Conway's law](https://en.wikipedia.org/wiki/Conway%27s_law). Where systems designed by 
-organisations have a tenancy to mimic the communication structures of those organisations. If you 
+organisations have a tenancy to mimic the communication structures of those organisations. If you look at your software 
+platform does it mimic the organisational structure and communication patterns of your organisation? I would love to know
+if you agree.
 
 The reason I mention this is that Cloud Native doesn't necessarily lend its self well to some of the "traditional" 
 organisational structures, where 
@@ -39,5 +41,5 @@ My main focus areas are:
 
 ### Contact me
 
-[alistair@heyal.co.uk](mailto:alistair@heyal.co.uk)
+Use the links in the footer to get in touch!
 
