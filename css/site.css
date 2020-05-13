@@ -1,0 +1,18 @@
+---
+---
+/* Front matter is necessary for Jekyll */
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+
+/* Write your styles below this line. */
+#header {
+    position: fixed;
+}
+
+#content {
+    margin-top: 100px;
+}
+/* Write your styles above this line. */
+
+@tailwind utilities;

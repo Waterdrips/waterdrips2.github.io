@@ -4,6 +4,7 @@ title: Docker Birmingham January 2020
 description: Building docker images for multiple CPU Architectures
 date: 08-01-2020
 image: pi.jpg
+headline_img: pi.jpg
 image_alt: Raspberry Pi computer
 ---
 

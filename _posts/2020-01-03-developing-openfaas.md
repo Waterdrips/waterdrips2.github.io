@@ -4,6 +4,7 @@ title: How To Get Started Contributing to OpenFaaS
 description: Get started contributing to OpenFaaS
 date: 04-01-2020
 image: of-contributing.jpg
+headline_img: of-contributing.jpg
 image_alt: A selection of Open Source stickers and my laptop
 ---
 

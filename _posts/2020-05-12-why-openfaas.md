@@ -4,6 +4,7 @@ title: OpenFaaS, what's it all about?
 description: Exploring serverless on Kubernetes. To roll your own or not?
 date: 12-05-2020
 image: of.png
+headline_img: of-headline.png
 image_alt: OpenFaaS Logo
 ---
 

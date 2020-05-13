@@ -4,6 +4,7 @@ title: Civo Kubernetes KUBE100
 description: What I have been up to on Civo's managed k3s service
 date: 07-01-2020
 image: civo-card.png
+headline_img: civo-card.png
 image_alt: civo kube100 stickers
 ---
 
