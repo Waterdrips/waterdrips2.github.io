@@ -1,11 +1,16 @@
 ---
 layout: post
-title: OpenFaaS, whats it all about?
+title: OpenFaaS, what's it all about?
 description: Exploring serverless on Kubernetes. To roll your own or not?
 date: 12-05-2020
 image: of.png
 image_alt: OpenFaaS Logo
 ---
+
+Serverless should let you focus on delivering features into production fast not fiddling with infrastructure.
+
+If you spend some time on the internet you should have seen that kubernetes is everywhere. It's a great platform for abstracting
+your infrastructure away from your developers and letting them focus on code.
 
 When it comes to deploying serverless on Kubernetes I am of two minds. Part of me thinks it's not "serverless" because you
 have to (at the very least) manage worker nodes (This is not strictly true, you could use AWS Fargate backed EKS Clusters?). 
