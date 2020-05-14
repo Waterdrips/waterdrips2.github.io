@@ -6,6 +6,7 @@ date: 12-05-2020
 image: of.png
 headline_img: of-headline.png
 image_alt: OpenFaaS Logo
+length: 8
 ---
 
 Serverless should let you focus on delivering features into production fast not fiddling with infrastructure.

@@ -6,6 +6,7 @@ date: 04-01-2020
 image: of-contributing.jpg
 headline_img: of-contributing.jpg
 image_alt: A selection of Open Source stickers and my laptop
+length: 11
 ---
 
 ![OpenFaaS Laptop](/images/of-contributing.jpg)

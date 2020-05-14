@@ -6,6 +6,7 @@ date: 08-01-2020
 image: pi.jpg
 headline_img: pi.jpg
 image_alt: Raspberry Pi computer
+length: 7
 ---
 
 Every 2 months a group of us host a meetup focused on Docker, You can find [the meetup page here](https://www.meetup.com/Docker-Birmingham/)

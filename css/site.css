@@ -13,6 +13,10 @@
 #content {
     margin-top: 100px;
 }
+
+.width-100 {
+    width: 100%;
+}
 /* Write your styles above this line. */
 
 @tailwind utilities;

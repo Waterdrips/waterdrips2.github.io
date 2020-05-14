@@ -4,17 +4,10 @@ title: About
 permalink: /about/
 ---
 
-I am a consultant Cloud Native Platform Engineer and programmer. I spend most of my spare time contributing 
+I am a Cloud Native Platform Engineer and programmer. I spend most of my spare time contributing 
 to projects like [OpenFaaS](https://www.openfaas.com), [K3sup](https://k3sup.dev) and [Inlets](https://inlets.dev).
 
 ### More Information
-
-I left my full time job at the end of 2019 to start my own business advising companies on Digital Transformation, 
-DevOps and Cloud Native architecture. 
-
-If your team has "a fear of deploying on a Friday" or is struggling with utilising the power of public cloud then I 
-would love to have a chat about how you can start to move in a new direction.
-
 
 My focus areas are:
 * Infrastructure as Code
