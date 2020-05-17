@@ -9,8 +9,6 @@ image_alt: civo kube100 stickers
 length: 10
 ---
 
-![civo-sticers](/images/civo-card.png)
-
 # The World's First Managed K3s
 
 When Civo announced they were looking for Beta testers for their new managed Kubernetes offering I obviously jumped

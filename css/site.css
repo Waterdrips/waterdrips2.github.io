@@ -17,6 +17,13 @@
 .width-100 {
     width: 100%;
 }
+
+.post-head.main-header {
+    height: 55vh;
+    min-height: 180px;
+    background-size: cover;
+}
+
 /* Write your styles above this line. */
 
 @tailwind utilities;

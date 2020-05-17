@@ -9,7 +9,6 @@ image_alt: A selection of Open Source stickers and my laptop
 length: 11
 ---
 
-![OpenFaaS Laptop](/images/of-contributing.jpg)
 
 # New Year New You?
 Don't bother with the Gym. We all know you won't keep it up. 

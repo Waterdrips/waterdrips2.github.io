@@ -10,8 +10,6 @@ length: 20
 ---
 
 
-![Street Sign with 127.0.0.1](/images/inlets-home.jpg)
-
 
 # Inlets! What is it?
 inlets is a reverse proxy and service tunnel written in Go.

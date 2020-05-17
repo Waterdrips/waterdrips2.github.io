@@ -10,9 +10,6 @@ length: 9
 ---
 
 
-![arkade logo](/images/arkade-logo.png)
-
-
 # Arkade! What is it?
 
 [Arkade (ark for short)](https://get-arkade.dev) provides a clean CLI with strongly-typed flags to install charts and apps to your cluster in one command.
