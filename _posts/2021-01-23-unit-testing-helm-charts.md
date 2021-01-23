@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Applying Test Driven Development to Helm Charts
-description: We explore unit testing Helm charts for Kubernetes apps
+title: How to unit-test your helm charts with Golang
+description: We explore unit testing Helm charts with Golang
 date: 23-01-2021
 image: helm.jpg
 headline_img: helm.jpg
