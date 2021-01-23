@@ -9,6 +9,8 @@ image_alt: OpenFaaS Logo
 length: 8
 ---
 
+Learn how to write Golang unit tests for your Helm charts to keep quality high and make changes with confidence.
+
 In both my open source and commercial work I have needed to write [helm charts](https://helm.sh/docs/topics/charts/). 
 These charts are a definition of how to install an application on kubernetes. They often include configuration options
 like if we should enable auth, clustering or specific database options. 
