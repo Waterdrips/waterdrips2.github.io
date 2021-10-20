@@ -14,12 +14,12 @@ length: 20
 # Inlets! What is it?
 inlets is a reverse proxy and service tunnel written in Go.
 
-This is the section from the [inlet's github README](https://github.com/inlets/inlets#inlets)
-> inlets combines a reverse proxy and websocket tunnels to expose your internal and development endpoints to the public Internet via an exit-node. An exit-node may be a 5-10 USD VPS or any other computer with an IPv4 IP address.
->
-> Why do we need this project? Similar tools such as ngrok or Argo Tunnel from Cloudflare are closed-source, have limits built-in, can work out expensive, and have limited support for arm/arm64. Ngrok is also often banned by corporate firewall policies meaning it can be unusable. Other open-source tunnel tools are designed to only set up a single static tunnel. inlets aims to dynamically bind and discover your local services to DNS entries with automated TLS certificates to a public IP address over a websocket tunnel.
->
-> When combined with SSL - inlets can be used with any corporate HTTP proxy which supports CONNECT.
+This is the section from the [inlet's github README](https://github.com/inlets/inlets-pro#overview)
+> inlets PRO replaces SSH tunnels, VPNs, SaaS tunnels, port-forwarding and dedicated connections.
+> 
+> It's compatible with any HTTP (L7) or TCP (L4) software and can work through the most challenging network conditions like captive portals, HTTP proxies, firewalls and NAT to give you access to services.
+> 
+> You can run the tunnel as a process, container or Kubernetes Pod, and it's easy to configure or automate it.
 
 This means you can use it to create inbound network tunnels to computers that don't have a public IP, are behind firewalls
 or get assigned new IPs frequently. Things like your laptop when you move from the office to a coffee shop. While writing 
@@ -33,7 +33,7 @@ inlets has a place on the Cloud Native Computing Foundation ([CNCF](https://cncf
 [Service Proxy](https://landscape.cncf.io/category=service-proxy&format=card-mode&grouping=category)  category along 
 with MetalLB, Traefik, HAProxy and Nginx.
 
-![Inlets Cloud NAtive card](/images/cncf-inlets.png)
+![Inlets Cloud Native card](/images/cncf-inlets.png)
 
 There are plenty of freemium services out there that will give you inbound network access to processes that don't have 
 inbound connectivity, but most of these services are in control of your data, rate limit and are closed source. Inlets 
@@ -42,13 +42,12 @@ gives you back control of your data, privacy and lets you run the service in the
 We have already mentioned a few services like Ngrok and Argo Tunnel, but they are closed source and have severe service
 restrictions, plus you are not fully in control of the service.
 
-
 With cloud VMs starting at $5 with heaps of inbound data transfer there's no need to pay 10s of dollars a month for someone else 
 to run a limited service for you. 
 
 ## How it works
 
-Inlets creates a tunnel from your local process to a public cloud instance (or anything that can accept inbound traffic).
+Inlets creates a tunnel from your local computer to a public cloud instance (or anything that can accept inbound traffic).
 I have been using digital ocean's smallest VMs as my exit nodes. However, you can set up inlets using anything that can be 
 accessed from both the internet, and the application or process you want to expose. 
 
@@ -65,27 +64,30 @@ I will be using this cli throughout the post as it simplifies the process of get
 |_|_| |_|_|\___|\__|___/\___|\__|_|
 
 
-inletsctl can create exit nodes for you on your preferred cloud provider
-so that you can run a single command and then connect with your inlets
-client.
+inletsctl automates the task of creating an exit-node on cloud infrastructure.
+Once provisioned, you'll receive a command to connect with. You can use this 
+tool whether you want to use inlets or inlets-pro for L4 TCP.
 
-See also: inlets-operator for Kubernetes and inlets-pro for TCP tunnelling.
+See also: inlets-operator which does the same job, but for Kubernetes services.
 
 Usage:
   inletsctl [flags]
   inletsctl [command]
 
 Available Commands:
-  create      Create an exit node
+  create      Create an exit-server with inlets PRO preinstalled.
   delete      Delete an exit node
+  download    Downloads the inlets PRO binary
   help        Help about any command
   kfwd        Forward a Kubernetes service to the local machine
+  update      Print update instructions
   version     Display the clients version information.
 
 Flags:
   -h, --help   help for inletsctl
 
 Use "inletsctl [command] --help" for more information about a command.
+
 ```
 
 The create command automates the provisioning, setup and configuration of the publicly accessible exit-node using cloud 
@@ -93,10 +95,13 @@ instances.
 
 Currently supported providers:
 * Digital Ocean
+* Equinix metal
+* AWS EC2
 * Scaleway
 * Civo
 * Google Cloud
-* Packet
+* Linode
+* Hertzner
 
 You will need your own account and will incur costs with whichever provider you use if you are following along.
 
@@ -127,7 +132,7 @@ incoming traffic immediately.
 I have been writing a separate post on the inlets operator. It has a much more specific usecase if using Kubernetes
 somewhere that you don't have inbound network traffic. Like k3s/k3d/minikube/microk8s/Docker Desktop/KinD. 
 
-It's worth exploring if you need to expose your local kubernetes services, for example to give a demo or collaborate.
+It's worth exploring if you need to expose your local kubernetes services, for example to give a demo or to collaborate.
 
 # People LOVE reverse proxies
 
@@ -139,8 +144,6 @@ I'm not sure I fully get why people seem to love tunneling network traffic into 
 disallowed (Corporate networks).
 
 # Why Inlets Pro?
-
-Inlets Pro is a commercial extension to inlets, you can [try it out and contact OpenFaaS for more information](https://github.com/inlets/inlets-pro-pkg#getting-a-license-key--more-info)
 
 According to the github REAMDE [inlets-pro is an L4 TCP load-balancer](https://github.com/inlets/inlets-pro-pkg/). 
 
@@ -161,14 +164,6 @@ These are some of the [features](https://github.com/inlets/inlets-pro-pkg/#featu
 * systemd support and automatic retries
 * Kubernetes compatible
 
-If you just want to expose a service for http traffic you can use inlets. I use standard inlets when proxying my draft 
-blog posts, which are served from my laptop, out to the internet so my friends and family can proofread them. (I'm REALLY
-bad at spelling)
-
-But for this post we will use both standard and pro features to show off as many use cases as possible.
-
-<br>
-
 ---
 
 # Enough talk - time for action
@@ -176,9 +171,9 @@ But for this post we will use both standard and pro features to show off as many
 ### Setup
 
 #### Inlets 
-We have already briefly looked at `inletsctl`, but we didnt discuss installation or setup. 
+We have already briefly looked at `inletsctl`, but we didn't discuss installation or setup. 
 
-> All of the commands shown are for linux and will probably work on Mac too. If you are using Windows then you should probably use git bash
+> All of the commands shown are for linux and will probably work on Mac too. If you are using Windows then you should probably use WSL. 
 
 
 Download and install inlets, inlets pro and inletsctl
@@ -188,13 +183,13 @@ Download and install inlets, inlets pro and inletsctl
 # Install Inletsctl to /usr/local/bin
 curl -sLSf https://inletsctl.inlets.dev | sudo sh
 
-# Install Inlets 
+# Install Inlets Pro
 sudo inletsctl download
 
-# Install Inlets Pro
-sudo inletsctl download --pro
-
 ```
+
+Get your Inlets license by buying a subscription [here](https://openfaas.gumroad.com/l/inlets-subscription)
+
 
 I'm using Digital Ocean for my exit nodes, you need to grab your Digital Ocean API Key if you are following along. 
 I have saved mine in a file called `do-token` in my home directory.
@@ -218,11 +213,13 @@ If you have docker installed you can do a quick test to see if it's working.
 ```sh 
 docker run --name nginx-test -d -p 8080:80 --rm nginx:latest 
 
+export LICENSE="your inlets pro license"
 
 export UPSTREAM=http://127.0.0.1:8080
-inlets client --remote "ws://157.245.37.54:8080" \
+inlets-pro tcp client --remote "ws://157.245.37.54:8080" \
       --token "fzjFpqorbwS4Zi06CQNxeSNOorlEk2z4qteh6ybCTHmOwvPcHL25hunDrHM5K5zw" \
-      --upstream $UPSTREAM
+      --upstream $UPSTREAM \
+      --license $LICENSE
 ```
 
 You should have some output in your terminal that shows inlets client connecting to your exit server. You can now navigate to
@@ -237,9 +234,7 @@ If that worked you can stop the docker container
 docker stop nginx-test
 ```
 
-
 Now we have validated our setup we can get into some real use cases! 
-
 
 Broadly my use cases are split into HTTP traffic, and non HTTP traffic. The example commands to forward these two 
 categories of traffic are the same, so I will show some example uses and then the 
@@ -254,7 +249,7 @@ commands needed to get inlets or inlets-pro working.
 
 ### Webhooks
 
-While developing [OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud) we rely on webhooks to let us know when new
+While developing [OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud) we reled on webhooks to let us know when new
 code has been pushed, and therefore when to run new builds.
 
 This is easy with inlets, we just forward the webhooks through an inlets exit-node to our local machine, this means we 
@@ -304,7 +299,8 @@ export UPSTREAM=http://127.0.0.1:4000
 
 inlets client --remote "ws://157.245.37.54:8080" \
       --token "fzjFpqorbwS4Zi06CQNxeSNOorlEk2z4qteh6ybCTHmOwvPcHL25hunDrHM5K5zw" \
-      --upstream $UPSTREAM
+      --upstream $UPSTREAM \
+      --lisence $LISENCE
 ```
 
 My local service will be accessible at the remote ip. That's it, all that's needed. 
@@ -390,12 +386,12 @@ inletsctl create --access-token-file ~/do-token --remote-tcp $RPI_IP
 This gives you a command that looks like this to run on our client to forward the traffic
 
 ```sh
-export TCP_PORTS="2222"
+export PORTS="2222"
 export LICENSE="YOUR INLETS_PRO_LISENCE"
-inlets-pro client --connect "wss://178.62.88.252:8123/connect" \
+inlets-pro tcp client --connect "wss://178.62.88.252:8123/connect" \
     --token "a-long-random-string" \
     --license "$LICENSE" \
-    --tcp-ports $TCP_PORTS
+    --ports $PORTS
 ```
 
 We need to forward port `2222`, so set this in the `TCP_PORTS` variable. Don't forget to set your inlets-pro licence key 
@@ -411,14 +407,13 @@ ssh -p 2222 pi@178.62.88.252
 ![ssh in from the public internet](/images/rpi-inlets-pro.png)
 
 
-This example should work for any service that uses TCP. You will just need to edit the `TCP_PORTS` environment variable
+This example should work for any service that uses TCP. You will just need to edit the `PORTS` environment variable
 and re-run the client command to forward different ports.
 
 
 # Have a go yourself
 
 Check out each of the tools we have looked at on github
-* [inlets](https://github.com/inlets/inlets) - the HTTP tunnel
 * [inlets-pro](https://github.com/inlets/inlets-pro-pkg) - the TCP tunnel
 * [inletsctl](https://github.com/inlets/inletsctl) - The cli tool we use to speed up provisioning servers
 
