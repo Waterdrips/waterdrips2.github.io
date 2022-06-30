@@ -3,8 +3,8 @@ layout: post
 title: My Home Office Build
 description: Build details for my home office
 date: 30-06-2022
-image: headline.jpg
-headline_img: headline.jpg
+image: office/headline.jpg
+headline_img: office/headline.jpg
 image_alt: Home office lit from above and the side
 length: 40
 ---
@@ -33,7 +33,7 @@ flooring, walls, shower and then re-fitted everything.
 
 I was already very privileged to have a dedicated room inside the house we purpose fitted to be my office. 
 
-![Inside Office](/imges/office/inside-office.jpg)
+![Inside Office](/images/office/inside-office.jpg)
 
 However, I like to have a project on the go!
 
