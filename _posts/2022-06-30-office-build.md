@@ -6,7 +6,7 @@ date: 30-06-2022
 image: office/headline.jpg
 headline_img: office/headline.jpg
 image_alt: Home office lit from above and the side
-length: 40
+length: 20
 ---
 
 # Building my home office
@@ -101,6 +101,8 @@ make a really solid base.
 
 We bought some metal mesh to reinforce the concrete to reduce the chance of cracking once dry. 
 
+![ready for concrete](/images/office/compacted.jpg)
+
 ## Concrete
 
 > less than 1 day (concrete delivered by lorry. 2 days for self-mix )
@@ -115,17 +117,72 @@ a few hours and I'm not strong enough for that!
 
 ![concrete poured](/images/office/concrete.jpg)
 
+Once the concrete is poured and leveled you need to wait about 3-5 days for it to set.
+
+This is a good time to finalise your wood order and buy insulation. 
+
 ## Wooden Frame
+
+> 1-2 days (screws, wood, screwdrivers, packers, bolts, socket sets, saw)
+
+Once the concrete was dry a 4"x3" wooden framw was bolted down into the concrete. We used long concrete bolts and drilled down into the base.
+The picture shows this without the second damp proof course (large plastic sheet) we added. This wooden base was leveled using the long spirit level 
+and placing small plastic packers under the wood to get a perfectly level and secure base.
+
+![wooden base](/images/office/frame.jpg)
+
+Now we have a base, we can start to build the walls, we worked out what length to cut the uprigts in the wall and then cut them all
+to the same length, once we had everytning we used a long beam along the top (called a wall plate) to start to build the first wall.
+
+![walls starting to be build](/images/office/walls.jpg)
+
+You can see the second damp proof course here (black plastic sheet) that went on top of the concrete.
+
+The corners were braced with those large diagonal lengths of wood to stop the frame falling over while we built it. Once you start 
+to get the wall timbers screwed onto the frame you no longer need to brace the frame (you will see these later!
+
+You can also see 3 sheets of the rigid foam insulation we are going to use for the floor. These were put into the frame to give us somewhere to
+stand so we didn't rip the plastic sheet (you need to keep it in-tact to stop any water getting into the building).
+
+Once you have done all 4 walls (leaving a gap for your door and window) you can start to attach the wall pannels.
+
+Because I had decided to have a 3m bifold door on the front of the building I used 2 9"x2" timbers screwed together to form the 
+top of the doorway. Bifold doors are HEAVY and they hang from above, so big timbers were used, bolted together with coach bolts and we also added an angle iron above the door. You will
+see these details in the next few photos because we moved quickly and I didn't get time to take photos of these specifically. 
+
+## Walls
+
+> 1-2 days (screws, wall pannels 8x4' 22mm OSB boards, screwdriver )
+
+![adding the wall boards](/images/office/walls.jpg) 
+
+We now have wall timbers we can start to screw in the large 8ft by 4ft boards onto the frame. These give good support to the walls and we made sure the room was
+square before screwing these up. The picture shows a few being added with overhang at the top, we cut the overhang off once the roof joists were added (next section) as there
+is no need to cut them before.
+
+It's just a case of using a lot of screws here to make sure every board is securely fixed onto the timbers.
+
+## Roof
 coming soon!
 ## Insulation
 coming soon!
+## Heating & Cooling
+coming soon!
 ## Windows & Doors
+coming soon!
+## Finishing the outside
+coming soon!
+## First fit electrics
 coming soon!
 ## Plaster-board
 coming soon!
 ## Plastering
 coming soon!
 ## Painting
+coming soon!
+## Second fit electrics
+coming soon!
+## Flooring
 coming soon!
 ## Skirting Board
 coming soon!
