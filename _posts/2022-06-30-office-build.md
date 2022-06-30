@@ -154,7 +154,7 @@ see these details in the next few photos because we moved quickly and I didn't g
 
 > 1-2 days (screws, wall pannels 8x4' 22mm OSB boards, screwdriver )
 
-![adding the wall boards](/images/office/walls.jpg) 
+![adding the wall boards](/images/office/walls-board.jpg) 
 
 We now have wall timbers we can start to screw in the large 8ft by 4ft boards onto the frame. These give good support to the walls and we made sure the room was
 square before screwing these up. The picture shows a few being added with overhang at the top, we cut the overhang off once the roof joists were added (next section) as there
@@ -163,7 +163,18 @@ is no need to cut them before.
 It's just a case of using a lot of screws here to make sure every board is securely fixed onto the timbers.
 
 ## Roof
-coming soon!
+
+> 1 day (wood, screws, screwdriver, step ladder, roofing material)
+
+I decided to use a 1:40 pitched roof, this has a slight runoff and I picked heavy duty EPDM membrane (thick rubber sheet) for the roof material. It's easy to install yourself
+and you can just lay it out without fixing it down to make your roof watertight very quickly!
+
+This was important because it rained.... A LOT the day we installed the roof so we worked very quickly to get the roof joists, boards and the membrane on. Unfortunatly I didn't get 
+any other photos, so this one shows all those things done!
+
+![roof starting to go on](/images/office/roof.jpg)
+
+
 ## Insulation
 coming soon!
 ## Heating & Cooling
