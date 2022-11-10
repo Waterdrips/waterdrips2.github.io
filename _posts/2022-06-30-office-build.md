@@ -77,7 +77,7 @@ to the back through a single doorway in the garage.
 Along with the power cable I ran 6 CAT6E (internet) cables from the garage, through the building into the trench. This could be done by n 
 electrician if you don't know how! I saved a few £££ by doing it myself as I work in technology and know what I'm doing. 
 
-> TIP: If you can hire a trench digging machine DO! Unless your distance is short it wills ave you A LOT of time.
+> TIP: If you can hire a trench digging machine DO! Unless your distance is short it will save you A LOT of time.
 
 ## Ground preparation 
 > 2-5 days (spade, wheelbarrow, pickaxe)
