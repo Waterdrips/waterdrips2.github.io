@@ -1,6 +1,5 @@
-version: "3"
 services:
-  openfaas-jekyll:
+  jekyll:
     command: jekyll serve --force_polling
     image: jekyll/jekyll:stable
     volumes:
