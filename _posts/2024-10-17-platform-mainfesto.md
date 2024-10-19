@@ -67,7 +67,7 @@ You have probably heard about [Conway's law](https://en.wikipedia.org/wiki/Conwa
 > Organizations which design systems (in the broad sense used here) are constrained to produce designs which are 
 > copies of the communication structures of these organizations.
 >
-> — Melvin E. Conway, How Do Committees Invent?
+> — Melvin E. Conway, How Do Committees Invent?
 
 Be deliberate in your organisation design, culture and communications. It matters!
 
@@ -78,7 +78,39 @@ Be deliberate in your organisation design, culture and communications. It matter
 
 ## Psychological Safety and autonomy
 
-There is little worse than working on a team with low levels of psychological safety. If you 
+There is little worse than working on a team with low levels of psychological safety. 
+
+// Sharing ideas
+// Learn to fail or fail to learn
+// 
+
+## Developer Onboarding
+
+Those of us that are fortunate enough to have had jobs in the industry will all have gone through an onboarding 
+process at some point. Once the HR stuff is out of the way yo are handed a computer and told to get cracking.
+
+My worse experience so far has been a multi-day battle with installing, configuring, and accessing various 
+portals 
+all driven from a woefully out of date confluence documentation that hasn't been touched since the last person was 
+onboarded. 
+
+My best? I was committing into production within 2 hours as there was a suite of tooling to automate setup, an 
+extremely high level of confidence in their testing, monitoring and rollback strategy and an ethos of rappid 
+experimentation.
+
+Engineer your developer onboarding to be fast and lightweight. Build internal tooling, don't rely on the developer 
+laptop having anything but docker installed and make sure your teams deploy to production many times a day. Tie 
+access to SSO and configure everything with a home-built CLI?
+
+## Everything as code (or software)
+
+Take "we use terraform" to the extreme. Configure your users emails with Terraform (from now on I will always use 
+Terraform as your go-to Infrastructure as Code tooling, replace this with your tool of choice). Configure your 
+Github/Gitlab teams, repositories and policies with code. 
+
+Configure your own product with terraform. Write your own terraform provider to onboard your customers (Unless your 
+app is self-service, which is even better)
+
 
 ## KISS
 
@@ -90,10 +122,6 @@ There is little worse than working on a team with low levels of psychological sa
 
 ## Shared Ownership
 
-## Everything as code (or software)
-// 
-// Build a CLI
-// 
 
 ## Security is a force multiplier
 
@@ -114,9 +142,6 @@ your network.
 I have seen vault policies that allow anyone coming from the VPN access to Admin AWS credentials. This is bad. Don't 
 be this company.
 
-
 ## Push vs Pull models for deployment
 
 ## Terraform model vs Kubernetes model
-
-
